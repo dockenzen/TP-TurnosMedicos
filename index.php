@@ -47,7 +47,7 @@
 				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Consulte sus turnos</a> </li>
 				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Listado de Doctores</a> </li>
 				<li><a onclick="Mostrar('registro')" class="btn">Registro</a> </li>
-				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Desloguearse</a> </li>
+				<li><a onclick="Mostrar('desloguear')" class="btn">Desloguearse</a> </li>
 				
 			</ul>
 			<!-- /#main-nav --> 

@@ -27,7 +27,7 @@ switch ($queHago) {
 		break;
 	case 'BorrarUsuario':
 			$user = new usuario();
-			$user->id=$_POST['id'];
+			$user->usuarioid=$_POST['id'];
 			$cantidad=$user->BorrarUsuario();
 			echo $cantidad;
 		break;

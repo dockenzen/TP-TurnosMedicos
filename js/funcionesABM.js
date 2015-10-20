@@ -10,6 +10,7 @@ function BorrarUsuario(idParametro)
 		}
 	});
 	funcionAjax.done(function(retorno){
+		alert(retorno);
 		Mostrar("MostrarGrilla");
 		$("#informe").html("cantidad de eliminados "+ retorno);
 
@@ -34,10 +35,12 @@ function EditarUsuario(idParametro)
 	funcionAjax.done(function(retorno){
 		var user =JSON.parse(retorno);
 		$("#id").val(user.id);
+		$("#correo").val(user.correo);
+		$("#clave").val(user.clave);
 		$("#provincia").val(user.provincia);
         $("#localidad").val(user.localidad);
         $("#direccion").val(user.direccion);
-		$("#candidato").val(user.candidato);
+		$("#nombre").val(user.nombre);
         if(voto.sexo == "F")
              $('input:radio[name="sexo"][value="F"]').prop('checked', true);
         else
