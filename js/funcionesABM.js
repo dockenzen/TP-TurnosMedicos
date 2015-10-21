@@ -20,6 +20,25 @@ function BorrarUsuario(idParametro)
 	});
 }
 
+$(document).ready(function (e){
+		$("#formReg").on('submit',(function(e){
+		e.preventDefault();
+	$.ajax({
+		url: "GuardarUsuario.php",
+		type: "POST",
+		data:  new FormData(this),
+		contentType: false,
+		cache: false,
+		processData:false,
+
+success: function(data){
+		$("#targetLayer").html(data);
+					   },
+error: function(){} 	        
+		  });
+											  }));
+});
+
 function EditarUsuario(idParametro)
 {
     Mostrar('MostrarFormAlta');
@@ -34,13 +53,13 @@ function EditarUsuario(idParametro)
 	});
 	funcionAjax.done(function(retorno){
 		var user =JSON.parse(retorno);
-		$("#id").val(user.id);
+		$("#id").val(user.usuarioid);
+		$("#nombre").val(user.nombre);
 		$("#correo").val(user.correo);
 		$("#clave").val(user.clave);
 		$("#provincia").val(user.provincia);
         $("#localidad").val(user.localidad);
         $("#direccion").val(user.direccion);
-		$("#nombre").val(user.nombre);
         if(voto.sexo == "F")
              $('input:radio[name="sexo"][value="F"]').prop('checked', true);
         else
@@ -54,11 +73,28 @@ function EditarUsuario(idParametro)
 
 function GuardarUsuario()
 {
-        var id = $("#id").val();
+	/*	$("#formReg").on('submit',(function(e){
+		e.preventDefault();
+	$.ajax({
+		url: "../php/GuardarUsuario.php",
+		type: "POST",
+		data:  new FormData(this),
+		contentType: false,
+		cache: false,
+		processData:false,
+
+success: function(data){
+		$("#targetLayer").html(data);
+					   },
+error: function(){} 	        
+		  });
+		  	})
+)
+  */      var id = $("#id").val();
 		var nombre=$("#nombre").val();
 		var correo=$("#correo").val();
 		var clave=$("#clave").val();
-		var foto=$("#foto").val();
+		var foto=$("#fichero").val();
 		var provincia=$("#provincia").val();
         var localidad=$("#localidad").val();
         var direccion=$("#direccion").val();

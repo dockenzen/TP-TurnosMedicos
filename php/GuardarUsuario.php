@@ -3,7 +3,8 @@ session_start();
 require_once"../clases/usuario.php";
 require_once"../clases/AccesoDatos.php";
 
-		
+	//	echo $_FILES['foto'];
+        echo $_POST['foto'];
         $email = $_POST['correo'];
         $ruta=getcwd();  //ruta directorio actual
         $rutaDestino=$ruta."\\imagenes\\Fotos\\";
@@ -19,10 +20,10 @@ require_once"../clases/AccesoDatos.php";
         //Muevo a carpeta Fotos
 		rename($rutaActual,$rutaDestino.$nuevoNombreDeFoto);
         //
-        move_uploaded_file($_FILES['foto']['tmp_name'], $rutaDestino.$nomarch);
+        move_uploaded_file($_FILES['foto']['tmp_name'], $rutaDestino.$nuevoNombreDeFoto);
 
         $usuario= new usuario();
-        $usuario->id = $_POST['id'];
+        $usuario->usuarioid = $_POST['id'];
         $usuario->correo=$email;
         $usuario->nombre=$_POST['nombre'];
         $usuario->clave=$_POST['clave'];

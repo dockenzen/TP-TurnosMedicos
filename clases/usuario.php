@@ -38,7 +38,7 @@ class usuario
 	 }
 	 public function GuardarUsuario()
 	 {
-	 	if($this->id>0)
+	 	if($this->usuarioid>0)
 	 		{
 	 			$this->ModificarUsuario();
 	 		}else {

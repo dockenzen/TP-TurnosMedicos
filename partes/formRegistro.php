@@ -24,8 +24,8 @@
         <label for="direccion" class="sr-only" hidden>Direccion</label>
                 <input type="text" id="direccion" class="form-control" placeholder="Direccion" required="" autofocus="">            
         <br>
-        <label for="foto" class="sr-only" hidden>Foto</label>
-                <input type="file" id="foto" class="form-control" placeholder="Foto" required="" autofocus="">                                    
+        <label for="fichero" class="sr-only" hidden>Foto</label>
+                <input type="file" id="fichero" class="form-control" placeholder="Foto" required="" autofocus="">                                    
         <br>
           <label>
             <input type="radio" Name="sexo" id="sexo" value="M" checked>Masculino
