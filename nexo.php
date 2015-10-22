@@ -63,6 +63,10 @@ switch ($queHago) {
         else
             echo "No ingreso marcador/es a guardar";
         break;
+    case 'olvidoContra':
+    	include("partes/olvidoPass.php");
+    break;
+
 	default:
 		# code...
 		break;

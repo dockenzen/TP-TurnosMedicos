@@ -8,7 +8,6 @@
 session_start();
 if(!isset($_SESSION['registrado'])){  ?>
     <div id="formLogin" class="container">
-
       <form  class="form-ingreso " onsubmit="validarLogin();return false;">
         <h2 class="form-ingreso-heading">Ingrese su E-Mail</h2>
         <label for="correo" class="sr-only">Correo</label>
@@ -22,6 +21,7 @@ if(!isset($_SESSION['registrado'])){  ?>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
       </form>
+      <a onclick="Mostrar('olvidoContra')">Olvido su contraseña?</a>
 
 
 
