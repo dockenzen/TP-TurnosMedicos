@@ -24,15 +24,15 @@ class usuario
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta =$objetoAccesoDato->RetornarConsulta("
 				CALL ModificarUsuario('$this->nombre','$this->correo','$this->clave',
-					'$this->foto','$this->sexo','$this->provincia', '$this->localidad', '$this->direccion',$this->usuarioid)");
+					'$this->foto','$this->sexo','$this->provincia', '$this->localidad','$this->direccion',$this->usuarioid)");
 			return $consulta->execute();
 	 }
 	 public function InsertarUsuario()
 	 {
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 				$consulta =$objetoAccesoDato->RetornarConsulta("
-					CALL InsertarUsuario('$this->nombre','$this->correo','$this->clave'
-						,'$this->foto','$this->sexo','$this->provincia', '$this->localidad', '$this->direccion')");
+					CALL InsertarUsuario('$this->nombre','$this->correo','$this->clave','$this->foto',
+						'$this->sexo','$this->provincia', '$this->localidad', '$this->direccion')");
 				$consulta->execute();
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	 }
@@ -65,15 +65,16 @@ class usuario
 	}
 	public static function ValidarUsuario($usuario,$clave)
     {
+    		$claveCifrada = sha1($clave);
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where correo='$usuario' and clave='$clave'");
+            $consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where correo='$usuario' and clave='$claveCifrada'");
             $consulta->execute();
             return $consulta->rowCount();
     }
 
 	public function mostrarDatos()
 	{
-	  	return "Metodo mostrar:".$this->dni."  ".$this->provincia."  ".$this->candidato;
+	  	return "Metodo mostrar:".$this->nombre."  ".$this->provincia."  ".$this->email;
 	}
 
 }

@@ -10,7 +10,7 @@ function BorrarUsuario(idParametro)
 		}
 	});
 	funcionAjax.done(function(retorno){
-		alert(retorno);
+		//alert(retorno);
 		Mostrar("MostrarGrilla");
 		$("#informe").html("cantidad de eliminados "+ retorno);
 
@@ -19,25 +19,6 @@ function BorrarUsuario(idParametro)
 		$("#informe").html(retorno.responseText);
 	});
 }
-
-$(document).ready(function (e){
-		$("#formReg").on('submit',(function(e){
-		e.preventDefault();
-	$.ajax({
-		url: "GuardarUsuario.php",
-		type: "POST",
-		data:  new FormData(this),
-		contentType: false,
-		cache: false,
-		processData:false,
-
-success: function(data){
-		$("#targetLayer").html(data);
-					   },
-error: function(){} 	        
-		  });
-											  }));
-});
 
 function EditarUsuario(idParametro)
 {
@@ -60,7 +41,7 @@ function EditarUsuario(idParametro)
 		$("#provincia").val(user.provincia);
         $("#localidad").val(user.localidad);
         $("#direccion").val(user.direccion);
-        if(voto.sexo == "F")
+        if(user.sexo == "F")
              $('input:radio[name="sexo"][value="F"]').prop('checked', true);
         else
             $('input:radio[name="sexo"][value="M"]').prop('checked', true);
@@ -73,59 +54,42 @@ function EditarUsuario(idParametro)
 
 function GuardarUsuario()
 {
-	/*	$("#formReg").on('submit',(function(e){
-		e.preventDefault();
-	$.ajax({
-		url: "../php/GuardarUsuario.php",
-		type: "POST",
-		data:  new FormData(this),
-		contentType: false,
-		cache: false,
-		processData:false,
+	    cargar();
+	    var envio = new FormData();
+    	    var files = $("#fichero").get(0).files; // $("#fichero") slector por id de jquery 
+            envio.append("correo", $("#correo").val());
+            envio.append("clave", $("#clave").val());
+            envio.append("nombre", $("#nombre").val());
+            envio.append("provincia", $("#provincia").val());
+            envio.append("localidad", $("#localidad").val());
+            envio.append("direccion", $("#direccion").val());
+            envio.append("id", $("#id").val());
+            envio.append("sexo", $('input:radio[name=sexo]:checked').val());
+   
+            for (var i = 0; i < files.length; i++)
+            {
+            envio.append("fichero0", files[i]);
+            }
 
-success: function(data){
-		$("#targetLayer").html(data);
-					   },
-error: function(){} 	        
-		  });
-		  	})
-)
-  */      var id = $("#id").val();
-		var nombre=$("#nombre").val();
-		var correo=$("#correo").val();
-		var clave=$("#clave").val();
-		var foto=$("#fichero").val();
-		var provincia=$("#provincia").val();
-        var localidad=$("#localidad").val();
-        var direccion=$("#direccion").val();
-		var sexo=$('input:radio[name=sexo]:checked').val();
-		//alert(foto);
 		var funcionAjax=$.ajax({
-		url:"php/GuardarUsuario.php",
+		url:"GuardarUsuario.php",
 		type:"POST",
-		data:{
-			//queHacer:"GuardarUsuario",
-			nombre:nombre,
-			correo:correo,
-			clave:clave,
-			foto:foto,
-			provincia:provincia,
-            localidad:localidad,
-            direccion: direccion,
-			sexo:sexo,
-            id: id
-		}
+		contentType: false,
+    	processData: false,
+		data:envio
+
 	});
 	funcionAjax.done(function(retorno){
-		alert(retorno);
+		alert("Usuario creado con exito !");
 			//deslogear();
 		$("#informe").html("cantidad de agregados "+ retorno);
 
 	});
 	funcionAjax.fail(function(retorno){
-		alert(retorno);
+		alert("Error al crear su usuario");
 		$("#informe").html(retorno.responseText);
 	});
+	MostrarLogin();
 }
 function VerEnMapa(prov, dire, loc, id)
 {
@@ -146,4 +110,42 @@ function VerEnMapa(prov, dire, loc, id)
 	Geolocalizacion.Marcador.iniciar();
 	Geolocalizacion.Marcador.verMarcador();
 	});
+}
+function cargar(){
+    var files = $("#fichero").get(0).files; // $("#fichero") slector por id de jquery  
+    var envio = new FormData();
+    for (var i = 0; i < files.length; i++) {
+    envio.append("fichero0", files[i]);
+    }
+    var promise = $.ajax
+            ({
+            type: "POST",
+            url: "ValidarFoto.php",
+            contentType: false,
+    		processData: false,
+            data: envio,
+            cache: false,
+            dataType: "text"
+          });// fin del ajax
+            
+    // la funcion Ajax me devuelve una promesa de javascript, algo que va a hacerse. Cuando el servidor responde y si la respuesta del servidor es exitosa ingresa al done y ejecuta la función que se le pasa
+    promise.done(function (dato){ 
+    	//alert(dato);
+                    $('#error').hide();
+                    console.log(dato);
+                    var strIndex = dato.indexOf('Error');
+                    if(strIndex == -1) {
+                        //string no encontrado
+                        $('#imagen').attr("src", "FotosTemp/" + files[0].name);
+                         $('#error').html("");
+                    } else {
+                        //string encontrado
+                        $('#error').html(dato);
+                        $('#error').show();
+                        $('#imagen').attr("src", "");
+                        $('#fichero').val("");
+                    }
+                       
+    });
+
 }

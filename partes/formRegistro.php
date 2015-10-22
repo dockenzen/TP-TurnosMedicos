@@ -9,14 +9,14 @@
 //if(isset($_SESSION['registrado'])){  ?>
     <div class="container">
 
-      <form id="formReg" enctype="multipart/form-data" class="form-ingreso " onsubmit="GuardarUsuario(); return false;">
+      <form id="formReg" method="POST" enctype="multipart/form-data" class="form-ingreso " onsubmit="GuardarUsuario(); return false;">
         <h2 class="form-ingreso-heading">Registro de usuario</h2>
         <label for="nombre" class="sr-only" hidden>Nombre</label>
-                <input type="text" id="nombre" class="form-control" placeholder="Nombre" required="" autofocus="">
+                <input type="text" id="nombre" class="form-control" placeholder="Nombre y Apellido" required="" autofocus="">
         <label for="correo" class="sr-only" hidden>Correo</label>
                 <input type="text" id="correo" class="form-control" placeholder="Correo" required="" autofocus="">
         <label for="clave" class="sr-only" hidden>Contraseña</label>
-                <input type="text" id="clave" class="form-control" placeholder="Contraseña" required="" autofocus="">
+                <input type="password" id="clave" class="form-control" placeholder="Contraseña" required="" autofocus="">
         <label for="provincia" class="sr-only" hidden>Provincia</label>
                 <input type="text" id="provincia" class="form-control" placeholder="Provincia" required="" autofocus="">
         <label for="localidad" class="sr-only" hidden>Localidad</label>
@@ -25,7 +25,7 @@
                 <input type="text" id="direccion" class="form-control" placeholder="Direccion" required="" autofocus="">            
         <br>
         <label for="fichero" class="sr-only" hidden>Foto</label>
-                <input type="file" id="fichero" class="form-control" placeholder="Foto" required="" autofocus="">                                    
+                <input type="file" id="fichero" name="fichero" class="form-control" placeholder="Foto" required="" autofocus="">                                    
         <br>
           <label>
             <input type="radio" Name="sexo" id="sexo" value="M" checked>Masculino

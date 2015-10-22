@@ -6,7 +6,7 @@
 
  ?>
 <script type="text/javascript">
-$("#content").css("width", "900px");
+$("#content").css("width", "1000px");
 </script>
 
 <table class="table" style=" background-color: beige;">
@@ -19,13 +19,13 @@ $("#content").css("width", "900px");
 		<?php 
 
 foreach ($arrayDeUsuarios as $user) {
-    $l = '"'.$user->provincia. '"'.',"'.$user->localidad. '"'.',"'.$user->direccion. '"'.',"'.$user->usuarioid. '"';
+    $l = '"'.$user->provincia. '"'.',"'.$user->direccion. '"'.',"'.$user->localidad. '"'.',"'.$user->usuarioid. '"';
 	echo"<tr>
 			<td><a onclick='EditarUsuario($user->usuarioid)' class='btn btn-warning'> <span class='glyphicon glyphicon-pencil'>&nbsp;</span>Editar</a></td>
 			<td><a onclick='BorrarUsuario($user->usuarioid)' class='btn btn-danger'>   <span class='glyphicon glyphicon-trash'>&nbsp;</span>Borrar</a></td>
 			<td>$user->nombre</td>
 			<td>$user->correo</td>
-            <td><img src='Fotos/$user->foto'></td>
+            <td><img src='imagenes/Fotos/$user->foto'></td>
             <td>$user->direccion</td>
             <td>$user->localidad</td>
             <td>$user->provincia</td>

@@ -26,7 +26,7 @@ if(isset($_FILES['fichero0']))
     			{
     				
     			$ruta=getcwd();  //ruta directorio actual
-    			$ruta=$ruta."\\FotosTemp\\";
+    			$ruta=$ruta."\\imagenes\\FotosTemp\\";
 				
 				//Se borra contenido directorio para limpiar de fotos de previws anteriores
     			$handle = opendir($ruta); 
