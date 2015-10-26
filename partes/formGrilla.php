@@ -1,4 +1,7 @@
 <?php 
+session_start();
+if(isset($_SESSION['administrador']))
+{
 	require_once("clases/AccesoDatos.php");
 	require_once("clases/usuario.php");
 	
@@ -25,7 +28,7 @@ foreach ($arrayDeUsuarios as $user) {
 			<td><a onclick='BorrarUsuario($user->usuarioid)' class='btn btn-danger'>   <span class='glyphicon glyphicon-trash'>&nbsp;</span>Borrar</a></td>
 			<td>$user->nombre</td>
 			<td>$user->correo</td>
-            <td><img src='imagenes/Fotos/$user->foto'></td>
+            <td><img src='imagenes/Fotos/$user->foto' class='fotoGrilla'></td>
             <td>$user->direccion</td>
             <td>$user->localidad</td>
             <td>$user->provincia</td>
@@ -34,3 +37,8 @@ foreach ($arrayDeUsuarios as $user) {
 }		?>
 	</tbody>
 </table>
+<?php 	}else	{
+		echo "<h4 class='widgettitle'>No estas registrado</h4>";
+	}
+
+	 ?>

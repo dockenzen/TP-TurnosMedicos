@@ -4,7 +4,7 @@ function validarLogin()
 		var clave=$("#clave").val();
 		var recordar=$("#recordarme").is(':checked');
 
-$("#sidebar").html("<img src='imagenes/ajax-loader.gif' style='width: 30px;'/>");
+//$("#sidebar").html("<img src='imagenes/ajax-loader.gif' style='width: 30px;'/>");
 
 	var funcionAjax=$.ajax({
 		url:"php/validarUsuario.php",
@@ -16,14 +16,20 @@ $("#sidebar").html("<img src='imagenes/ajax-loader.gif' style='width: 30px;'/>")
 		}
 	});
 	funcionAjax.done(function(retorno){
-			if(retorno.trim()=="ingreso"){
-				//Mostrar('votacion'); mostrar ingreso a consultas
-				//MostarLogin();
+			if(retorno.trim()=="ingreso")
+			{
+				MostrarBotones();
+				MostrarLogin();
+
+			//	$("#BotonLogin").html("Ir a salir<br>-Sesión-");
+			//	$("#BotonLogin").addClass("btn btn-danger");				
+			//	$("#usuario").val("usuario: "+retorno);
+			}else
+			{
+				$("#Contador").html("usuario o clave incorrecta");	
+				$("#formLogin").addClass("animated bounceInLeft");
 			}
-        else
-        {
-			MostrarLogin();
-        }
+
 	});
 	funcionAjax.fail(function(retorno){
 		$("#botonesABM").html(":(");
@@ -38,8 +44,8 @@ function deslogear()
 		type:"post"
 	});
 	funcionAjax.done(function(retorno){
-			//MostarBotones();
 			MostrarLogin();
+			MostrarBotones();
 	});
 }
 function MostrarBotones()
@@ -49,11 +55,13 @@ function MostrarBotones()
 		type:"post",
 		data:{queHacer:"MostrarBotones"}
 	});
-	funcionAjax.done(function(retorno){
+	funcionAjax.done(function(retorno){		
 		$("#botonesABM").html(retorno);
 		//$("#sidebar").html("Correcto BOTONES!!!");
+
 	});
 }
+
   $(document).ready(function(){
     $("#frmRestablecer").submit(function(event){
       event.preventDefault();

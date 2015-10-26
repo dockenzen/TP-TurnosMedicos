@@ -2,7 +2,9 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/ingreso.css" rel="stylesheet">
 
- 
+ <script type="text/javascript">
+$("#content").css("width", "500px");
+</script>
 <?php 
  
 //session_start();

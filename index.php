@@ -15,9 +15,11 @@
 
 <!-- media queries css -->
  <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css">
+
  <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-<!--<link rel="icon" href="http://www.octavio.com.ar/favicon.ico">-->
+
+
 <script type="text/javascript" src="js/funcionesAjax.js"></script>
 <script type="text/javascript" src="js/funcionesLogin.js"></script>
 <script type="text/javascript" src="js/funcionesABM.js"></script>
@@ -32,6 +34,11 @@
 
 <body>
 
+<?php
+session_start();
+
+?>
+
 <div id="pagewrap">
 
 	<header id="header">
@@ -44,10 +51,12 @@
 		<nav>
 			<ul id="main-nav" class="clearfix">
 				<li><a onclick="MostrarLogin()" class="btn">Ingreso</a></li>
-				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Consulte sus turnos</a> </li>
+				<li><a onclick="Mostrar('registro')" class="btn">Registro</a> </li>				
+				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Consulte sus turnos</a> </li>				
 				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Listado de Doctores</a> </li>
-				<li><a onclick="Mostrar('registro')" class="btn">Registro</a> </li>
-				<li><a onclick="Mostrar('desloguear')" class="btn">Desloguearse</a> </li>
+				<li> </li>
+				<li> </li>
+				<li><a valign="right" onclick="deslogear()" class="btn">Desloguearse</a> </li>
 				
 			</ul>
 			<!-- /#main-nav --> 
@@ -91,7 +100,7 @@
 		<!-- /.widget -->
 
 		<section class="widget clearfix" >
-			<h4 class="widgettitle">Contador de votos</h4>
+			<h4 class="widgettitle">Informe</h4>
 				<div id="Contador">
 				<!--contenido dinamico cargado por ajax-->
 				</div>
