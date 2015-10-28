@@ -3,25 +3,28 @@ session_start();
 			require_once"../clases/medico.php";
 			require_once"../clases/AccesoDatos.php";
 
-		$in = date(($_POST["horarioEntrada"]));
-		$hora =date(($_POST['horarioSalida']));
-		$entrada = new DateTime($in);			
-		$salida = new DateTime($hora);	
-		
-		$pri = date_format($entrada,'H:i:s');
-		$segun = date_format($salida,'H:i:s');
+		$in = ($_POST["horarioEntrada"]);
+		$hora = ($_POST['horarioSalida']);
+		$in = $in.':00.';
+		$hora = $hora.':00.';
 
-		//$entrada = date_format($in,'His');
+		//$entrada = new DateTime($in);			
+		//$salida = new DateTime($hora);			
 		
-		//$salida = date_format($hora,'H:i:s');
-		echo $pri;
-		echo $segun;
+		$pri = strtotime($in);
+		$segun = strtotime($hora);
+		
+
+		$entrada = date('H:i:s',$pri);
+		
+		$salida = date('H:i:s',$segun);
+
         $med= new medico();
         $med->medicoid = $_POST['id'];
         $med->nombre=$_POST['nombre'];
         $med->especialidadid=$_POST['especialidadid'];
-        $med->horarioEntrada=$pri;
-        $med->horarioSalida=$segun;
+        $med->horarioEntrada=$entrada;
+        $med->horarioSalida=$salida;
         $cantidad=$med->GuardarMedico();
-		return $cantidad;
+		return  $cantidad;//$cantidad;
 ?>

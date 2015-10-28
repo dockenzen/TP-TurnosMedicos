@@ -52,9 +52,9 @@ session_start();
 			<ul id="main-nav" class="clearfix">
 				<li><a onclick="MostrarLogin()" class="btn">Ingreso</a></li>
 				<li><a onclick="Mostrar('registro')" class="btn">Registro</a> </li>				
-				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Consulte sus turnos</a> </li>				
-				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Listado de Doctores</a> </li>
-				<li> </li>
+				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Gestion de Consultas</a> </li>
+				<li><a onclick="Mostrar('MostrarGrilla')" class="btn">Su historial de Consultas</a> </li>				
+				<li><a onclick="Mostrar('MostrarGrillaMedicos')" class="btn">Listado de Doctores</a> </li>
 				<li> </li>
 				<li><a valign="right" onclick="deslogear()" class="btn">Desloguearse</a> </li>
 				

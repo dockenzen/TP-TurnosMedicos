@@ -179,3 +179,33 @@ function GuardarMedico()
 	});
 	MostrarLogin();
 }
+function GuardarConsulta()
+{
+	    var envio = new FormData();
+            envio.append("nombre", $("#nombre").val());
+            envio.append("especialidadid", $("#especialidadid").val());
+            envio.append("horarioEntrada", $("#horarioEntrada").val());
+            envio.append("horarioSalida", $("#horarioSalida").val());
+            envio.append("id", $("#id").val());
+
+		var funcionAjax=$.ajax({
+		url:"php/GuardarConsulta.php",
+		type:"POST",
+		contentType: false,
+    	processData: false,
+		data:envio
+
+	});
+	funcionAjax.done(function(retorno){
+		alert(retorno);
+		alert("Consulta generada con exito !");
+			//deslogear();
+		$("#informe").html("cantidad de agregados "+ retorno);
+
+	});
+	funcionAjax.fail(function(retorno){
+		alert("Error al generar consulta");
+		$("#informe").html(retorno.responseText);
+	});
+	MostrarLogin();
+}

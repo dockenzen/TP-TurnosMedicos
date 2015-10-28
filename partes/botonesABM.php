@@ -8,7 +8,7 @@ if(isset($_SESSION['administrador']))
 		
 			<h4 class="widgettitle"><center>Administracion</center></h4>
 			<ul>
-				<li><a onclick="Mostrar('MostrarGrillaMedicos')" class=" btn-lg MiBotonUTN" ><span class="glyphicon glyphicon-th">&nbsp;</span>Grilla Usuarios</a></li>
+				<li><a onclick="Mostrar('MostrarGrilla')" class=" btn-lg MiBotonUTN" ><span class="glyphicon glyphicon-th">&nbsp;</span>Grilla Usuarios</a></li>
 				<li><a onclick="Mostrar('MostrarFormAltaMedicos')" class="btn-lg MiBotonUTN" ><span class="glyphicon glyphicon-plus-sign">&nbsp;</span>Alta Profesionales</a></li>
 			
 			</ul>
