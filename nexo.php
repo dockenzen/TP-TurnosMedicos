@@ -22,6 +22,9 @@ switch ($queHago) {
 	case 'MostrarFormAlta':
 			include("partes/formRegistro.php");
 		break;
+	case 'MostrarFormConsulta':
+			include("partes/formConsulta.php");
+		break;
     case 'VerEnMapa':
         	include("partes/formMapa.php");
 		break;
@@ -72,6 +75,9 @@ switch ($queHago) {
 	case 'GuardarMedico':
    		include("php/GuardarMedico.php");
    break;
+   case 'MostrarGrillaConsulta':
+		include("partes/formGrillaConsulta.php");
+	break;
     case 'olvidoContra':
     	include("partes/olvidoPass.php");
     break;

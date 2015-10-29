@@ -72,3 +72,45 @@ function MostrarLogin()
 
 	});
 }
+function ElegirEspecialidad()
+{
+	document.getElementById('divHorario').style.display = "none";	
+	$("#espeId").val(valor); 	
+
+ 			var valor = $("#especialidad").val();	
+   			$.ajax({
+	  		url: 'formConsulta.php',
+  			type: 'POST',
+  			async: true,
+  			data: valor=valor,
+  			//success: procesaRespuesta,
+  			//error: muestraError
+  			beforeSend: function () {
+                        $("#informe").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#informe").html(response);
+                }
+		});
+   		if(valor != 0)
+   		{
+   			document.getElementById('divMedico').style.display = "inherit";	
+   		}
+   		else
+   		{
+   			document.getElementById('divMedico').style.display = "none";	
+   		}	
+
+}
+function ElegirMedico()
+{
+	var med = $("#medico").val();
+	if(med != 0)
+	{
+	document.getElementById('divHorario').style.display = "inherit";		
+	}
+	else
+	{
+	document.getElementById('divHorario').style.display = "none";			
+	}
+}

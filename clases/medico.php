@@ -49,6 +49,13 @@ class medico
 			$medicoBuscado= $consulta->fetchObject('medico');
 			return $medicoBuscado;
 	}
+	public static function TraerTodosLosMedicosPorEspecialidad($idd)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodosLosMedicosPorEspecialidad($idd)");
+		$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_CLASS, "medico");	
+	}
 
 	public function GuardarMedico()
 	{
