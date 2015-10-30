@@ -82,7 +82,7 @@ function ElegirEspecialidad()
 	  		url: 'formConsulta.php',
   			type: 'POST',
   			async: true,
-  			data: valor=valor,
+  			data: {valor:valor},
   			//success: procesaRespuesta,
   			//error: muestraError
   			beforeSend: function () {

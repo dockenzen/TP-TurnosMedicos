@@ -27,7 +27,7 @@ if(isset($_SESSION['registrado']))
 		<label for="especialidad">Especialidad</label>
         <br>                    	
     	<?php
-        	echo "<select id=especialidad class='form-control' onclick='ElegirEspecialidad();return false;'>";
+        	echo "<select id=especialidad class='form-control' onclick='ElegirEspecialidad()'>";
         	echo "<option value=0>Seleccione una Especialidad</option>";
         	foreach ($arrayEspecialidades as $espe) 
         	{
@@ -44,10 +44,11 @@ if(isset($_SESSION['registrado']))
                 <br>                    	
 
         <?php
+        var_dump($_POST);
         	$valor = $_POST["valor"];
         	$arrayMedicos = medico::TraerTodosLosMedicosPorEspecialidad(2);
 
-        	echo "<select id=medico class='form-control' onclick='ElegirMedico();return false;'>";
+        	echo "<select id=medico class='form-control' onclick='ElegirMedico()'>";
         	echo "<option value=0>Seleccione un Doctor</option>";
         	foreach ($arrayMedicos as $medi) 
         	{
