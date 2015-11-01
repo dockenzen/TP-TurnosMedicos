@@ -2,11 +2,11 @@
 <link href="css/ingreso.css" rel="stylesheet">
 
 <script type="text/javascript">
-$("#container").css("width", "500px");
+$("#container").css("width", "400px");
 </script>
 
 <div class="container" id="container">
-<form id="frmRestablecer" action="php/validaremail.php" method="post">
+<form id="frmRestablecer" onsubmit="validarEmail();return false;" method="post">
   <div class="panel panel-default">
     <div class="panel-heading"> Restaurar contraseña </div>
      <div class="panel-body">

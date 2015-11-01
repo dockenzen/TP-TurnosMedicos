@@ -61,18 +61,31 @@ function MostrarBotones()
 
 	});
 }
+function validarEmail()
+{
+    var envio = new FormData();
+    envio.append("email", $("#email").val());
 
-  $(document).ready(function(){
-    $("#frmRestablecer").submit(function(event){
-      event.preventDefault();
-      $.ajax({
-        url:'validaremail.php',
-        type:'post',
-        dataType:'json',
-        data:$("#frmRestablecer").serializeArray()
-      }).done(function(respuesta){
-        $("#mensaje").html(respuesta.mensaje);
-        $("#email").val('');
+    var funcionAjax = $.ajax({
+        url:'php/validaremail.php',
+        type:'POST',
+        contentType: false,
+    	processData: false,
+		data:envio
       });
+
+    funcionAjax.done(function(respuesta){
+     var retorno = JSON.parse(respuesta);
+        $("#principal").html(retorno);
+     //   $("#email").val('');
+  		$("#informe").html("Correcto");
     });
-  });
+
+    funcionAjax.fail(function(respuesta){
+     var retorno = JSON.parse(respuesta);
+    //	alert(respuesta);
+		$("#principal").html(retorno);
+		$("#sidebar").html(":(");
+	});
+  
+ }

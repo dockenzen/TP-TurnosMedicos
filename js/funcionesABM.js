@@ -145,9 +145,7 @@ function cargar(){
                         $('#imagen').attr("src", "");
                         $('#fichero').val("");
                     }
-                       
     });
-
 }
 function GuardarMedico()
 {
@@ -182,10 +180,11 @@ function GuardarMedico()
 function GuardarConsulta()
 {
 	    var envio = new FormData();
-            envio.append("nombre", $("#nombre").val());
-            envio.append("especialidadid", $("#especialidadid").val());
+            envio.append("sintoma", $("#sintoma").val());
+            envio.append("espeId", $("#espeId").val());
+            envio.append("medId", $("#medId").val());
             envio.append("horarioEntrada", $("#horarioEntrada").val());
-            envio.append("horarioSalida", $("#horarioSalida").val());
+
             envio.append("id", $("#id").val());
 
 		var funcionAjax=$.ajax({

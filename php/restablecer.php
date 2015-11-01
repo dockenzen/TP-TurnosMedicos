@@ -15,7 +15,7 @@ if( $resultado->num_rows > 0 ){
 <!DOCTYPE html>
 <html lang="es">
  <head>
-  <meta name="author" content="denker">
+  <meta name="DOCKENZEN" content="denker">
   <title> Restablecer contraseña </title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@ if( $resultado->num_rows > 0 ){
   <div class="container" role="main">
    <div class="col-md-4"></div>
    <div class="col-md-4">
-    <form action="cambiarpassword.php" method="post">
+    <form action="php/cambiarpassword.php" method="post">
      <div class="panel panel-default">
       <div class="panel-heading"> Restaurar contraseña </div>
       <div class="panel-body">

@@ -1,24 +1,52 @@
 <?php 
+      require_once("../clases/AccesoDatos.php");
+      require_once("../clases/usuario.php");
+
+$email = $_POST['email'];
+$respuesta = new stdClass();
+if( $email != "" )
+{
+  $user = usuario::TraerUnUsuarioPorCorreo($email);
+   if($user != null)
+   {     
+      $linkTemporal = generarLinkTemporal($user->usuarioid, $user->correo);
+      if($linkTemporal)
+      {
+        enviarEmail( $email, $linkTemporal );
+        $respuesta->mensaje = "<div class='alert alert-info'> Un correo ha sido enviado a su cuenta de email con las instrucciones para restablecer la contraseña </div>";
+      }
+   }
+   else
+  {
+   $respuesta->mensaje = "<div class='alert alert-warning'> No existe una cuenta asociada a ese correo. </div>";
+  }
+}
+else
+{
+   $respuesta->mensaje= "Debes introducir el email de la cuenta";
+ }
+echo json_encode($respuesta->mensaje);
+
 function generarLinkTemporal($idusuario, $username)
 {
    // Se genera una cadena para validar el cambio de contraseña
    $cadena = $idusuario.$username.rand(1,9999999).date('Y-m-d');
    $token = sha1($cadena);
- 
-   $conexion = new mysqli('localhost', 'root', '', 'clinica');
-   // Se inserta el registro en la tabla tblreseteopass
-   $sql = "INSERT INTO tblreseteopass (idusuario, username, token, creado) VALUES($idusuario,'$username','$token',NOW());";
-   $resultado = $conexion->query($sql);
-   if($resultado){
-      // Se devuelve el link que se enviara al usuario
-      $enlace = $_SERVER["SERVER_NAME"].'/pass/restablecer.php?idusuario='.sha1($idusuario).'&token='.$token;
+
+
+  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO tblreseteopass (idusuario, username, token, creado) VALUES($idusuario,'$username','$token',NOW());");
+        $consulta->execute();
+        $resultado = $objetoAccesoDato->RetornarUltimoIdInsertado(); 
+   if($resultado != 0)
+   {
+      $enlace = $_SERVER["SERVER_NAME"].'/php/restablecer.php?idusuario='.sha1($idusuario).'&token='.$token;
       return $enlace;
    }
    else
       return FALSE;
 }
- 
-function enviarEmail( $email, $link )
+function enviarEmail($email, $link)
 {
    $mensaje = '<html>
      <head>
@@ -36,38 +64,8 @@ function enviarEmail( $email, $link )
  
    $cabeceras = 'MIME-Version: 1.0' . "\r\n";
    $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-   $cabeceras .= 'From: Dockenzen <lea_eldoc@hotmail.com>' . "\r\n";
+   $cabeceras .= 'From Catriel: <ElReDocKenZen@hahaha.com>' . "\r\n";
    // Se envia el correo al usuario
    mail($email, "Recuperar contraseña", $mensaje, $cabeceras);
 }
-
-$email = $_POST['email'];
- 
-$respuesta = new stdClass();
- 
-if( $email != "" )
-{
-   $conexion = new mysqli('localhost', 'root', '', 'clinica');
-   $sql = " SELECT * FROM usuario WHERE correo = '$email' ";
-   $resultado = $conexion->query($sql);
-   if($resultado->num_rows > 0)
-   {
-      $usuario = $resultado->fetch_assoc();
-      $linkTemporal = generarLinkTemporal( $usuario['id'], $usuario['username'] );
-      if($linkTemporal)
-      {
-        enviarEmail( $email, $linkTemporal );
-        $respuesta->mensaje = "<div class='alert alert-info'> Un correo ha sido enviado a su cuenta de email con las instrucciones para restablecer la contraseña </div>";
-      }
-   }
-   else
-  {
-   $respuesta->mensaje = "<div class='alert alert-warning'> No existe una cuenta asociada a ese correo. </div>";
-  }
-}
-else
-{
-   $respuesta->mensaje= "Debes introducir el email de la cuenta";
- }
- echo json_encode( $respuesta );
 ?>

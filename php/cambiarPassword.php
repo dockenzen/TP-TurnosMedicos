@@ -24,14 +24,14 @@ if( $password1 != "" && $password2 != "" && $idusuario != "" && $token != "" )
       <div class="col-md-2"></div>
       <div class="col-md-8">
 <?php
-   $conexion = new mysqli('localhost', 'root', '', 'ejemplobd');
+   $conexion = new mysqli('localhost', 'root', '', 'clinica');
    $sql = " SELECT * FROM tblreseteopass WHERE token = '$token' ";
    $resultado = $conexion->query($sql);
    if( $resultado->num_rows > 0 ){
       $usuario = $resultado->fetch_assoc();
       if( sha1( $usuario['idusuario'] === $idusuario ) ){
          if( $password1 === $password2 ){
-            $sql = "UPDATE users SET password = '".sha1($password1)."' WHERE id = ".$usuario['idusuario'];
+            $sql = "UPDATE usuario SET clave = '".sha1($password1)."' WHERE usuarioid = ".$usuario['idusuario'];
             $resultado = $conexion->query($sql);
             if($resultado){
                $sql = "DELETE FROM tblreseteopass WHERE token = '$token';";

@@ -22,12 +22,12 @@ if(isset($_SESSION['registrado']))
     <div class="container">
   	<h2 class="form-ingreso-heading">Generar Consulta</h2>
   <form id="formConsulta" method="POST" enctype="multipart/form-data" class="form-ingreso " onsubmit="GuardarConsulta(); return false;">
-  	<input type="hidden" name="usuarioid" id="usuarioid" value="<?php echo '$user->usuarioid' ?>" readonly>
+  	<input type="hidden" name="usuarioid" id="usuarioid" value="<?php echo $user->usuarioid ?>" readonly>
   	<div id="divEspecialidad">
 		<label for="especialidad">Especialidad</label>
         <br>                    	
     	<?php
-        	echo "<select id=especialidad class='form-control' onclick='ElegirEspecialidad()'>";
+        	echo "<select id=especialidad class='form-control' onchange='ElegirEspecialidad()'>";
         	echo "<option value=0>Seleccione una Especialidad</option>";
         	foreach ($arrayEspecialidades as $espe) 
         	{
@@ -56,15 +56,23 @@ if(isset($_SESSION['registrado']))
         	}
         	echo "</select>";
 		?>
-        
+   		<input type="hidden" name="medId" id="medId" readonly>
+
         <br>    
     </div>
     <div id="divHorario" hidden>
         <label for="horarioEntrada">Horarios disponibles</label>
-        <input type="time" id="horarioEntrada" class="form-control" placeholder="Seleccione horario" required="" autofocus="">
+        <input type="time" id="horario" class="form-control" placeholder="Seleccione horario" required="" autofocus="" onchange="ElegirHorario()">
         <br>      
 	</div>
+	<div id="divSintoma" hidden>
 		<input type="hidden" name="id" id="id" readonly>
+
+		<label for="horarioEntrada">Describa sus sintomas</label>
+		<textarea rows="4" cols="39" name="sintoma" id="sintoma" hidden>
+		</textarea >
+		<br>      
+	</div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Reservar</button>
       </form>
     </div> <!-- /container -->

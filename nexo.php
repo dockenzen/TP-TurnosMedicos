@@ -1,6 +1,10 @@
 <?php 
 require_once("clases/AccesoDatos.php");
 require_once("clases/usuario.php");
+require_once("clases/especialidad.php");
+require_once("clases/medico.php");
+
+
 $queHago=$_POST['queHacer'];
 
 switch ($queHago) {
@@ -78,10 +82,17 @@ switch ($queHago) {
    case 'MostrarGrillaConsulta':
 		include("partes/formGrillaConsulta.php");
 	break;
+	case 'ElegirConsulta':
+		
+		break;
+	case 'ElegirMedico':
+		
+		break;
     case 'olvidoContra':
     	include("partes/olvidoPass.php");
     break;
 
+    
 
 	default:
 		# code...

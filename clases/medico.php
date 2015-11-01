@@ -28,9 +28,7 @@ class medico
 	 public function InsertarMedico()
 	{
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-				$consulta =$objetoAccesoDato->RetornarConsulta("
-					CALL InsertarMedico('$this->nombre','$this->especialidadid',
-						'$this->horarioEntrada','$this->horarioSalida')");
+				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `medico`(`nombreMedico`, `especialidadid`, `horarioEntrada`, `horarioSalida`) VALUES ('$this->nombre','$this->especialidadid','$this->horarioEntrada','$this->horarioSalida')");
 				$consulta->execute();
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
