@@ -16,8 +16,8 @@ if(isset($_SESSION['administrador'])){  ?>
       <form id="formRegMed" method="POST" enctype="multipart/form-data" class="form-ingreso " onsubmit="GuardarMedico(); return false;">
         <h2 class="form-ingreso-heading">Registro de Medico</h2>
         
-        <label for="nombre">Nombre del profesional</label>
-                <input type="text" id="nombre" class="form-control" placeholder="Nombre y Apellido" required="" autofocus="">
+        <label for="nombreMedico">Nombre del profesional</label>
+                <input type="text" id="nombreMedico" class="form-control" placeholder="Nombre y Apellido" required="">
         <br>
         <!--Aca select de especialidad-->
         <label for="especialidadid">Especialidad</label>
@@ -31,14 +31,14 @@ if(isset($_SESSION['administrador'])){  ?>
 ?>        
         <br>                
         <label for="horarioEntrada">Horario de Entrada Laboral</label>
-                <input type="time" id="horarioEntrada" class="form-control" placeholder="Seleccione horario" required="" autofocus="">
+                <input type="time" id="horarioEntrada" class="form-control" required="" >
         <br>
         <label for="horarioSalida">Horario de Salida Laboral</label>
-                <input type="time" valign="middle" id="horarioSalida" class="form-control" placeholder="Seleccione horario" required="" autofocus="">
+                <input type="time" valign="middle" id="horarioSalida" class="form-control" required="">
         <br>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
-        <input type="hidden" name="id" id="id" readonly>
+        <input type="hidden" name="medicoid" id="medicoid">
       </form>
 
 

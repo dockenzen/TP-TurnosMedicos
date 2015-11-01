@@ -32,18 +32,44 @@ switch ($queHago) {
     case 'VerEnMapa':
         	include("partes/formMapa.php");
 		break;
+	/*	En Revision
+		case 'restablecer':
+        	include("php/restablecer.php");
+        	*/
+		break;
 	case 'BorrarUsuario':
-			$user = new usuario();
-			$user->usuarioid=$_POST['id'];
+			$user = usuario::TraerUnUsuario($_POST['id']);
+			$pick = $user->foto;
+			$ruta=getcwd();  //ruta directorio actual
+    		$ruta=$ruta."\\imagenes\\Fotos\\".$user->foto
+    		;
+			if (is_file($ruta)) 
+			{ 
+				unlink($ruta); 				
+			}			
 			$cantidad=$user->BorrarUsuario();
-			echo $cantidad;
+			echo $cantidad;			
 		break;
 	case 'GuardarUsuario':
 			include("php/GuardarUsuario.php");
    		break;
+	case 'GuardarConsulta':
+			$consu = new consulta();
+			$consu->sintomas=$_POST['sintoma'];
+			$consu->especialidadid=$_POST['espeId'];
+			$consu->medicoid=$_POST['medId'];
+			$consu->usuarioid=$_POST['usuarioid'];
+			$consu->horarioConsulta=$_POST['horarioFinal'];
+			$reto = $consu->InsertarConsulta();
+			return $reto;
+   		break;   		
 	case 'TraerUsuario':
 			$user = usuario::TraerUnUsuario($_POST['id']);
 			echo json_encode($user);
+		break;
+	case 'TraerMedico':
+			$medico = medico::TraerUnMedico($_POST['id']);
+			echo json_encode($medico);
 		break;
     case 'guardarMarcadores':
         session_start();
@@ -82,11 +108,10 @@ switch ($queHago) {
    case 'MostrarGrillaConsulta':
 		include("partes/formGrillaConsulta.php");
 	break;
-	case 'ElegirConsulta':
-		
-		break;
-	case 'ElegirMedico':
-		
+	case 'BorrarMedico':
+		$user = medico::TraerUnMedico($_POST['id']);
+		$cantidad=$user->BorrarMedico();
+		echo $cantidad;			
 		break;
     case 'olvidoContra':
     	include("partes/olvidoPass.php");

@@ -18,10 +18,6 @@ class consulta
 				$consulta->execute();
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
-	public function GuardarConsulta()
-	{
-	 			$this->InsertarConsulta();
-	}
 	public static function TraerTodasLasConsultasPorUsuario($userid)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();

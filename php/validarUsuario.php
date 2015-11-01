@@ -12,7 +12,6 @@ if(usuario::ValidarUsuario($correo,$clave))
 	if($recordar=="true")
 	{
 		setcookie("correo",$correo, time()+36000 , '/');		
-		setcookie("clave",$clave, time()+36000 , '/');		
 	}
 
 	$arrayDeUsuarios=usuario::TraerTodosLosUsuarios();
@@ -27,7 +26,7 @@ if(usuario::ValidarUsuario($correo,$clave))
 			else
 				if($user->roleid == 1)
 				{
-					$_SESSION['administrador']=$user->nombre;			
+					$_SESSION['administrador']=$user->nombre;
 					$retorno="ingreso";
 				}
 				else

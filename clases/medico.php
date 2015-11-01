@@ -3,7 +3,7 @@
 class medico
 {
 	public $medicoid;
-	public $nombre;
+	public $nombreMedico;
 	public $especialidadid;
 	public $horarioEntrada;
 	public $horarioSalida;
@@ -20,9 +20,8 @@ class medico
 	public function ModificarMedico()
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				CALL ModificarMedico('$this->nombre','$this->especialidadid','$this->horarioEntrada',
-					'$this->horarioSalida',$this->medicoid)");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE medico SET nombreMedico='$this->nombreMedico',especialidadid='$this->especialidadid'
+			,horarioEntrada='$this->horarioEntrada',horarioSalida='$this->horarioSalida' WHERE medicoid=$this->medicoid");
 			return $consulta->execute();
 	}
 	 public function InsertarMedico()
@@ -65,6 +64,13 @@ class medico
 	 	{
 	 		$this->InsertarMedico();
 	 	}
+	}
+	public static function TraerHorariosPorMedico($id)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerHorariosPorMedico($id)");
+		$consulta->execute();
+		return $consulta->fetch_array();
 	}
 	
 }

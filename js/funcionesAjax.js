@@ -78,22 +78,20 @@ function ElegirEspecialidad()
 
 
  			var valor = $("#especialidad").val();	
+ 			$("#espeId").val(valor); 	
 
- 				$("#espeId").val(valor); 	
- 			alert(valor);
-   			$.ajax({
-	  		url: 'partes/formConsulta.php',
+   		var funcionAjax = $.ajax({
+	  		url: 'partes/medicosDisponibles.php',
   			type: 'POST',
   			async: true,
-  			data: valor,
-  			//success: procesaRespuesta,
-  			//error: muestraError
-  			beforeSend: function () {
-                        $("#informe").html("Procesando, espere por favor...");
-                },
-                success:  function (response) {
-                        $("#informe").html(response);
-                }
+  			data: {valor:valor}
+
+  			});
+            funcionAjax.done(function(retorno){
+			$("#divMedico").html(retorno);
+			$("#informe").html("Seleccion de medico");
+			
+
 		});
    		if(valor != 0)
    		{
@@ -108,8 +106,22 @@ function ElegirEspecialidad()
 }
 function ElegirMedico()
 {
-	var med = $("#medico").val();
-	if(med != 0)
+ 	var valor = $("#medico").val();	
+ 	$("#medId").val(valor); 	
+
+	var funcionAjax = $.ajax({
+			url: 'partes/horariosDisponibles.php',
+			type: 'POST',
+			async: true,
+			data: {valor:valor}
+		});
+
+        funcionAjax.done(function(retorno){
+		$("#divHorario").html(retorno);
+		$("#informe").html("Seleccion de horario");
+		});
+
+	if(valor != 0)
 	{
 	document.getElementById('divHorario').style.display = "inherit";		
 	}
@@ -120,14 +132,47 @@ function ElegirMedico()
 }
 function ElegirHorario()
 {
-	var med = $("#medico").val();
-	if(med != 0)
+	var valor = $("#horarioConsulta").val();	
+ 	$("#horarioFinal").val(valor); 	
+
+	if(valor != 0)
 	{
-	document.getElementById('divHorario').style.display = "inherit";		
+	document.getElementById('divSintoma').style.display = "inherit";		
 	}
 	else
 	{
-	document.getElementById('divHorario').style.display = "none";			
+	document.getElementById('divSintoma').style.display = "none";			
 	}
 }
 
+
+
+/*	En Revision
+function RestablecerPass($token, $idusuario)
+{
+
+		Mostrar('restablecer')
+
+	    var envio = new FormData();
+
+        envio.append("token", $token);
+        envio.append("idusuario", $idusuario);
+
+		var funcionAjax=$.ajax({
+		url:"php/restablecer.php",
+		type:"POST",
+		contentType: false,
+    	processData: false,
+		data:envio
+	});
+	funcionAjax.done(function(retorno){
+	//	alert("Usuario creado con exito !");
+			//deslogear();
+		$("#informe").html("cantidad de agregados "+ retorno);
+
+	});
+	funcionAjax.fail(function(retorno){
+	//	alert("Error al crear su usuario");
+		$("#informe").html(retorno.responseText);
+	});
+}*/

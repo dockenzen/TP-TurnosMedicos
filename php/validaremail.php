@@ -33,14 +33,14 @@ function generarLinkTemporal($idusuario, $username)
    $cadena = $idusuario.$username.rand(1,9999999).date('Y-m-d');
    $token = sha1($cadena);
 
+      $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+      $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO tblreseteopass (idusuario, username, token, creado) VALUES($idusuario,'$username','$token',NOW());");
+      $consulta->execute();
+      $resultado = $objetoAccesoDato->RetornarUltimoIdInsertado(); 
 
-  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO tblreseteopass (idusuario, username, token, creado) VALUES($idusuario,'$username','$token',NOW());");
-        $consulta->execute();
-        $resultado = $objetoAccesoDato->RetornarUltimoIdInsertado(); 
    if($resultado != 0)
-   {
-      $enlace = $_SERVER["SERVER_NAME"].'/php/restablecer.php?idusuario='.sha1($idusuario).'&token='.$token;
+   {//$_SERVER["SERVER_NAME"]
+      $enlace = 'localhost:8080/tp/php/restablecer.php?idusuario='.sha1($idusuario).'&token='.$token;
       return $enlace;
    }
    else
@@ -48,7 +48,7 @@ function generarLinkTemporal($idusuario, $username)
 }
 function enviarEmail($email, $link)
 {
-   $mensaje = '<html>
+   $mensaje = "<html>
      <head>
         <title>Restablece tu contraseña</title>
      </head>
@@ -57,15 +57,18 @@ function enviarEmail($email, $link)
        <p>Si hiciste esta petición, haz clic en el siguiente enlace, si no hiciste esta petición puedes ignorar este correo.</p>
        <p>
          <strong>Enlace para restablecer tu contraseña</strong><br>
-         <a href="'.$link.'"> Restablecer contraseña </a>
+         <a href=".$link.">Restablecer Contraseña</a>
+         <p>Si no puede acceder, copie y pegue el siguiente link en su navegador</p>
+         <p>".$link."</a>
+
        </p>
      </body>
-    </html>';
+    </html>";
  
    $cabeceras = 'MIME-Version: 1.0' . "\r\n";
-   $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+   $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
    $cabeceras .= 'From Catriel: <ElReDocKenZen@hahaha.com>' . "\r\n";
    // Se envia el correo al usuario
-   mail($email, "Recuperar contraseña", $mensaje, $cabeceras);
+   mail($email, "Recuperacion de clave de usuario", $mensaje, $cabeceras);
 }
 ?>

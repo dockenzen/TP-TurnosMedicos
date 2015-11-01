@@ -10,8 +10,8 @@ function BorrarUsuario(idParametro)
 		}
 	});
 	funcionAjax.done(function(retorno){
-		//alert(retorno);
 		Mostrar("MostrarGrilla");
+		//alert(retorno);
 		$("#informe").html("cantidad de eliminados "+ retorno);
 
 	});
@@ -147,10 +147,59 @@ function cargar(){
                     }
     });
 }
+function BorrarMedico(idParametro)
+{
+	//alert(idParametro);
+		var funcionAjax=$.ajax({
+		url:"nexo.php",
+		type:"post",
+		data:{
+			queHacer:"BorrarMedico",
+			id:idParametro
+		}
+	});
+	funcionAjax.done(function(retorno){
+		Mostrar("MostrarGrillaMedicos");
+		//alert(retorno);
+		$("#informe").html("cantidad de eliminados "+ retorno);
+
+	});
+	funcionAjax.fail(function(retorno){
+		$("#informe").html(retorno.responseText);
+	});
+}
+function EditarMedico(idParametro)
+{
+	//esto tendria que estar dentro de una funcion ajax para que se ejecute 
+	//antes que la funcion ajax de traer medico
+    Mostrar('MostrarFormAltaMedicos');
+
+	var funcionAjax=$.ajax({
+
+		url:"nexo.php",
+		type:"post",
+		data:{
+			queHacer:"TraerMedico",
+			id:idParametro
+		}
+	});
+	funcionAjax.done(function(retorno){
+		var retorno = JSON.parse(retorno);
+		alert(retorno.medicoid);
+		$("#medicoid").val(retorno.medicoid);
+		$("#nombreMedico").val(retorno.nombreMedico);
+		$("#especialidadid").val(retorno.especialidadid);
+        $("#horarioEntrada").val(retorno.horarioEntrada);
+        $("#horarioSalida").val(retorno.horarioSalida);
+	});
+	funcionAjax.fail(function(retorno){
+		$("#principal").html(retorno.responseText);
+	});
+}
 function GuardarMedico()
 {
 	    var envio = new FormData();
-            envio.append("nombre", $("#nombre").val());
+            envio.append("nombreMedico", $("#nombreMedico").val());
             envio.append("especialidadid", $("#especialidadid").val());
             envio.append("horarioEntrada", $("#horarioEntrada").val());
             envio.append("horarioSalida", $("#horarioSalida").val());
@@ -183,12 +232,12 @@ function GuardarConsulta()
             envio.append("sintoma", $("#sintoma").val());
             envio.append("espeId", $("#espeId").val());
             envio.append("medId", $("#medId").val());
-            envio.append("horarioEntrada", $("#horarioEntrada").val());
-
-            envio.append("id", $("#id").val());
+            envio.append("horarioConsulta", $("#horarioConsulta").val());
+            envio.append("usuarioid", $("#usuarioid").val());
 
 		var funcionAjax=$.ajax({
-		url:"php/GuardarConsulta.php",
+		queHacer:'GuardarConsulta',
+		url:"nexo.php",
 		type:"POST",
 		contentType: false,
     	processData: false,
@@ -199,7 +248,7 @@ function GuardarConsulta()
 		alert(retorno);
 		alert("Consulta generada con exito !");
 			//deslogear();
-		$("#informe").html("cantidad de agregados "+ retorno);
+		$("#informe").html("Consultas agregadas "+ retorno);
 
 	});
 	funcionAjax.fail(function(retorno){

@@ -79,9 +79,11 @@ session_start();
 			</header>
 			<hr>
 			<div id="principal">
-
 <?php
-
+/*	En Revision
+			if(isset($_GET['token']) && isset($_GET['idusuario']))
+				RestablecerPass($_GET['token'],$_GET['idusuario'])
+*/
 ?>
 			</div>		
 

@@ -35,15 +35,12 @@ if(isset($_FILES['fichero0']))
 				{   
 					if (is_file($ruta.$file)) 
 					{ 
-						unlink($ruta.$file); 
-						
+						unlink($ruta.$file); 				
 					}
-				
 				} 
     			
     			$nomarch=$NOMEXT[0].".".$EXT;  // no olvidar el "." separador de nombre/ext
     			move_uploaded_file($_FILES['fichero0']['tmp_name'], $ruta.$nomarch);
-
     			echo $ruta.$nomarch;
     			}
 			}

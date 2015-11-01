@@ -1,32 +1,37 @@
 <?php
+      require_once("../clases/AccesoDatos.php");
+      require_once("../clases/usuario.php");
 
 $token = $_GET['token'];
 $idusuario = $_GET['idusuario'];
- 
-$conexion = new mysqli('localhost', 'root', '', 'ejemplobd');
- 
+
+$conexion = AccesoDatos::dameUnObjetoAcceso(); 
 $sql = "SELECT * FROM tblreseteopass WHERE token = '$token'";
-$resultado = $conexion->query($sql);
+$consu =$conexion->RetornarConsulta($sql);
+$consu->execute();
+$resultado = $consu->rowCount();
  
-if( $resultado->num_rows > 0 ){
-   $usuario = $resultado->fetch_assoc();
-   if( sha1($usuario['idusuario']) == $idusuario ){
+if( $resultado > 0 )
+{
+   $usuario = $consu->fetchObject();
+   if( sha1($usuario->idusuario) == $idusuario ){
 ?>
 <!DOCTYPE html>
 <html lang="es">
  <head>
+  <meta charset="utf-8">
   <meta name="DOCKENZEN" content="denker">
   <title> Restablecer contraseña </title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
  </head>
  
  <body>
   <div class="container" role="main">
    <div class="col-md-4"></div>
    <div class="col-md-4">
-    <form action="php/cambiarpassword.php" method="post">
+    <form action="cambiarpassword.php" method="post">
      <div class="panel panel-default">
       <div class="panel-heading"> Restaurar contraseña </div>
       <div class="panel-body">

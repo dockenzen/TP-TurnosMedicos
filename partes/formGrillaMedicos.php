@@ -24,8 +24,8 @@ $("#content").css("width", "1000px");
 foreach ($arrayDeMedicos as $med) {
   //  $l = '"'.$user->provincia. '"'.',"'.$user->direccion. '"'.',"'.$user->localidad. '"'.',"'.$user->usuarioid. '"';
 	echo"<tr>
-			<td><a onclick='EditarUsuario($med->medicoid)' class='btn btn-warning'> <span class='glyphicon glyphicon-pencil'>&nbsp;</span>Editar</a></td>
-			<td><a onclick='BorrarUsuario($med->medicoid)' class='btn btn-danger'>   <span class='glyphicon glyphicon-trash'>&nbsp;</span>Borrar</a></td>
+			<td><a onclick='EditarMedico($med->medicoid)' class='btn btn-warning'> <span class='glyphicon glyphicon-pencil'>&nbsp;</span>Editar</a></td>
+			<td><a onclick='BorrarMedico($med->medicoid)' class='btn btn-danger'>   <span class='glyphicon glyphicon-trash'>&nbsp;</span>Borrar</a></td>
 			<td>$med->nombreMedico</td>
 			<td>$med->nombre</td>
             <td>$med->horarioEntrada</td>

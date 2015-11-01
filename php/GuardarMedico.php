@@ -9,8 +9,8 @@ session_start();
 		$hora = $hora.':00.';
 
         $med= new medico();
-        $med->medicoid = $_POST['id'];
-        $med->nombre=$_POST['nombre'];
+        $med->medicoid = $_POST['medicoid'];
+        $med->nombre=$_POST['nombreMedico'];
         $med->especialidadid=$_POST['especialidadid'];
         $med->horarioEntrada=$in;
         $med->horarioSalida=$hora;
