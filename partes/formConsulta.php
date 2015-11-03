@@ -5,7 +5,7 @@
 <script type="text/javascript">
 $("#content").css("width", "500px");
 </script>
-<?php 
+<?php
 		  session_start();
 
           require_once("clases/AccesoDatos.php");
@@ -25,23 +25,23 @@ if(isset($_SESSION['registrado']))
   <form id="formConsulta" method="POST" enctype="multipart/form-data" class="form-ingreso " onsubmit="GuardarConsulta(); return false;">
   	<div id="divEspecialidad">
 		<label for="especialidad">Especialidad</label>
-        <br>                    	
+        <br>
     	<?php
         	echo "<select id=especialidad class='form-control' onchange='ElegirEspecialidad()'>";
         	echo "<option value=0>Seleccione una Especialidad</option>";
-        	foreach ($arrayEspecialidades as $espe) 
+        	foreach ($arrayEspecialidades as $espe)
         	{
         	  	echo "<option value='$espe->especialidadid'>$espe->nombre</option>";
         	}
         	echo "</select>";
-		  ?>   
+		  ?>
 	</div>
 	<div id="divMedico" hidden>
-        
-        
+
+
   </div>
   <div id="divHorario" hidden>
-        
+
 
 	</div>
 
@@ -49,7 +49,7 @@ if(isset($_SESSION['registrado']))
 	      <label for="sintoma">Describa sus sintomas</label>
 	     	<textarea rows="4" cols="39" name="sintoma" id="sintoma" hidden>
 		    </textarea >
-		    <br>      
+		    <br>
 	</div>
         <input type="hidden" name="usuarioid" id="usuarioid" value="<?php echo $user->usuarioid ?>" readonly>
         <input type="hidden" name="espeId" id="espeId" readonly>
@@ -59,10 +59,8 @@ if(isset($_SESSION['registrado']))
       </form>
     </div> <!-- /container -->
 
-  <?php 
+  <?php
 }
   else{    echo"<h3>Usted no esta loguedo. </h3>"; }
 
   ?>
-    
-  

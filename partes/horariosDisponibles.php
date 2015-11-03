@@ -7,10 +7,10 @@
 ?>
 		<br>
 		<label for="horarioConsulta">Horarios disponibles</label>
-        <br>                    	
+        <br>
         <select id="horarioConsulta" class='form-control' onchange="ElegirHorario()">
           <option value="0">Seleccione horario</option>"
-<?php     foreach ($arrayHorario as $hora) 
+<?php     foreach ($arrayHorario as $hora)
           {
 			echo "<option value='$hora->hora'>$hora->hora</option>";
     	  }

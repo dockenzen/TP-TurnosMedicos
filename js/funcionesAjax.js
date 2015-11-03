@@ -81,11 +81,11 @@ function MostrarLogin()
 }
 function ElegirEspecialidad()
 {
-	document.getElementById('divHorario').style.display = "none";	
+	document.getElementById('divHorario').style.display = "none";
 
 
- 			var valor = $("#especialidad").val();	
- 			$("#espeId").val(valor); 	
+ 			var valor = $("#especialidad").val();
+ 			$("#espeId").val(valor);
 
    		var funcionAjax = $.ajax({
 	  		url: 'partes/medicosDisponibles.php',
@@ -97,24 +97,24 @@ function ElegirEspecialidad()
             funcionAjax.done(function(retorno){
 			$("#divMedico").html(retorno);
 			$("#informe").html("Seleccion de medico");
-			
+
 
 		});
    		if(valor != 0)
    		{
 
-   			document.getElementById('divMedico').style.display = "inherit";	
+   			document.getElementById('divMedico').style.display = "inherit";
    		}
    		else
    		{
-   			document.getElementById('divMedico').style.display = "none";	
-   		}	
+   			document.getElementById('divMedico').style.display = "none";
+   		}
 
 }
 function ElegirMedico()
 {
- 	var valor = $("#medico").val();	
- 	$("#medId").val(valor); 	
+ 	var valor = $("#medico").val();
+ 	$("#medId").val(valor);
 
 	var funcionAjax = $.ajax({
 			url: 'partes/horariosDisponibles.php',
@@ -130,25 +130,25 @@ function ElegirMedico()
 
 	if(valor != 0)
 	{
-	document.getElementById('divHorario').style.display = "inherit";		
+	document.getElementById('divHorario').style.display = "inherit";
 	}
 	else
 	{
-	document.getElementById('divHorario').style.display = "none";			
+	document.getElementById('divHorario').style.display = "none";
 	}
 }
 function ElegirHorario()
 {
-	var valor = $("#horarioConsulta").val();	
- 	$("#horarioFinal").val(valor); 	
+	var valor = $("#horarioConsulta").val();
+ 	$("#horarioFinal").val(valor);
 
 	if(valor != 0)
 	{
-	document.getElementById('divSintoma').style.display = "inherit";		
+	document.getElementById('divSintoma').style.display = "inherit";
 	}
 	else
 	{
-	document.getElementById('divSintoma').style.display = "none";			
+	document.getElementById('divSintoma').style.display = "none";
 	}
 }
 

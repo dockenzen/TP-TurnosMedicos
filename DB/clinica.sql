@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.5.0.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2015 a las 14:25:13
--- Versión del servidor: 5.5.39
--- Versión de PHP: 5.4.31
+-- Host: 127.0.0.1
+-- Generation Time: Nov 03, 2015 at 11:33 PM
+-- Server version: 10.0.17-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,71 +14,58 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `clinica`
+-- Database: `clinica`
 --
 
 DELIMITER $$
 --
--- Procedimientos
+-- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarMedico`(IN `idd` INT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarMedico` (IN `idd` INT)  NO SQL
 DELETE FROM medico WHERE medicoid = idd$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarUsuario`(IN `id` INT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarUsuario` (IN `id` INT)  NO SQL
 DELETE FROM usuario WHERE usuarioid = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarConsulta`(IN `userid` INT, IN `medid` INT, IN `espeid` INT, IN `horacon` VARCHAR(50), IN `sint` TEXT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarConsulta` (IN `userid` INT, IN `medid` INT, IN `espeid` INT, IN `horacon` VARCHAR(50), IN `sint` TEXT)  NO SQL
 INSERT INTO `consulta`(`usuarioid`, `medicoid`, `especialidadid`, `horarioConsulta`, `sintomas`) VALUES (userid,medid,espeid,horacon,sint)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarUsuario`(IN `name` VARCHAR(50), IN `mail` VARCHAR(50), IN `pass` VARCHAR(50), IN `pick` VARCHAR(100), IN `sex` CHAR(1), IN `prov` VARCHAR(50), IN `loc` VARCHAR(50), IN `dir` VARCHAR(50))
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarUsuario` (IN `name` VARCHAR(50), IN `mail` VARCHAR(50), IN `pass` VARCHAR(50), IN `pick` VARCHAR(100), IN `sex` CHAR(1), IN `prov` VARCHAR(50), IN `loc` VARCHAR(50), IN `dir` VARCHAR(50))  NO SQL
 INSERT INTO `usuario`( `nombre`,`correo`, `clave`,`foto`,`sexo`, `provincia`, `localidad`, `direccion`) VALUES ( name , mail , pass ,pick,sex, prov , loc , dir)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ModificarUsuario`(IN `name` VARCHAR(50), IN `mail` VARCHAR(50), IN `pass` VARCHAR(50), IN `pick` VARCHAR(100), IN `prov` VARCHAR(50), IN `loc` VARCHAR(50), IN `dir` VARCHAR(50), IN `idd` INT, IN `sex` CHAR(1))
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ModificarUsuario` (IN `name` VARCHAR(50), IN `mail` VARCHAR(50), IN `pass` VARCHAR(50), IN `pick` VARCHAR(100), IN `prov` VARCHAR(50), IN `loc` VARCHAR(50), IN `dir` VARCHAR(50), IN `idd` INT, IN `sex` CHAR(1))  NO SQL
 UPDATE `usuario` SET `nombre`=name,`correo`=mail,`clave`=pass,`foto`=pick,`sexo`=sex,
 `provincia`=prov,`localidad`=loc,`direccion`=dir WHERE usuarioid = idd$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodasLasConsultasPorUsuario`(IN `userid` INT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodasLasConsultasPorUsuario` (IN `userid` INT)  NO SQL
 SELECT usuario.nombre, medico.nombreMedico as medico, especialidad.nombre as especialidad, consulta.horarioConsulta, consulta.sintomas 
 from consulta inner join usuario on consulta.usuarioid = usuario.usuarioid
 			  inner join medico on consulta.medicoid = medico.medicoid
               inner join especialidad on consulta.especialidadid = especialidad.especialidadid              
 where consulta.usuarioid = userid$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodasLasEspecialidades`()
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodasLasEspecialidades` ()  NO SQL
 SELECT * FROM especialidad$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosMedicos`()
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosMedicos` ()  NO SQL
 SELECT medicoid, nombreMedico,nombre,horarioEntrada,horarioSalida FROM `medico` inner join especialidad on medico.especialidadid = especialidad.especialidadid$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosMedicosPorEspecialidad`(IN `idd` INT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosMedicosPorEspecialidad` (IN `idd` INT)  NO SQL
 SELECT * FROM medico where especialidadid = idd$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosUsuarios`()
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosUsuarios` ()  NO SQL
 SELECT * FROM usuario$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnMedico`(IN `idd` INT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnMedico` (IN `idd` INT)  NO SQL
 SELECT * FROM medico WHERE medicoid = idd$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnUsuario`(IN `idd` INT)
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnUsuario` (IN `idd` INT)  NO SQL
 SELECT * FROM usuario where usuarioid = idd$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnUsuarioPorCorreo`(IN `mail` VARCHAR(50))
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnUsuarioPorCorreo` (IN `mail` VARCHAR(50))  NO SQL
 SELECT * FROM usuario WHERE correo = mail$$
 
 DELIMITER ;
@@ -86,31 +73,31 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `consulta`
+-- Table structure for table `consulta`
 --
 
-CREATE TABLE IF NOT EXISTS `consulta` (
-`consultaid` int(11) NOT NULL,
+CREATE TABLE `consulta` (
+  `consultaid` int(11) NOT NULL,
   `usuarioid` int(11) NOT NULL,
   `medicoid` int(11) NOT NULL,
   `especialidadid` int(11) NOT NULL,
   `horarioConsulta` varchar(50) NOT NULL,
   `sintomas` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `especialidad`
+-- Table structure for table `especialidad`
 --
 
-CREATE TABLE IF NOT EXISTS `especialidad` (
-`especialidadid` int(11) NOT NULL,
+CREATE TABLE `especialidad` (
+  `especialidadid` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `especialidad`
+-- Dumping data for table `especialidad`
 --
 
 INSERT INTO `especialidad` (`especialidadid`, `nombre`) VALUES
@@ -123,19 +110,95 @@ INSERT INTO `especialidad` (`especialidadid`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `medico`
+-- Table structure for table `fecha`
 --
 
-CREATE TABLE IF NOT EXISTS `medico` (
-`medicoid` int(11) NOT NULL,
+CREATE TABLE `fecha` (
+  `fechaid` int(11) NOT NULL,
+  `dia` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fecha`
+--
+
+INSERT INTO `fecha` (`fechaid`, `dia`) VALUES
+(1, 'lunes'),
+(2, 'martes'),
+(3, 'miercoles'),
+(4, 'jueves'),
+(5, 'viernes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fechahoramedico`
+--
+
+CREATE TABLE `fechahoramedico` (
+  `fechahoramedicoid` int(11) NOT NULL,
+  `medicoid` int(11) NOT NULL,
+  `horarioid` int(11) NOT NULL,
+  `fechaid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `horario`
+--
+
+CREATE TABLE `horario` (
+  `horaid` int(11) NOT NULL,
+  `hora` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `horario`
+--
+
+INSERT INTO `horario` (`horaid`, `hora`) VALUES
+(1, '01:00:00'),
+(2, '02:00:00'),
+(3, '03:00:00'),
+(4, '04:00:00'),
+(5, '05:00:00'),
+(6, '06:00:00'),
+(7, '07:00:00'),
+(8, '08:00:00'),
+(9, '09:00:00'),
+(10, '10:00:00'),
+(11, '11:00:00'),
+(12, '12:00:00'),
+(13, '13:00:00'),
+(14, '14:00:00'),
+(15, '15:00:00'),
+(16, '16:00:00'),
+(17, '17:00:00'),
+(18, '18:00:00'),
+(19, '19:00:00'),
+(20, '20:00:00'),
+(21, '21:00:00'),
+(22, '22:00:00'),
+(23, '23:00:00'),
+(24, '00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medico`
+--
+
+CREATE TABLE `medico` (
+  `medicoid` int(11) NOT NULL,
   `nombreMedico` varchar(50) NOT NULL,
   `especialidadid` int(11) NOT NULL,
   `horarioEntrada` time NOT NULL,
   `horarioSalida` time NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `medico`
+-- Dumping data for table `medico`
 --
 
 INSERT INTO `medico` (`medicoid`, `nombreMedico`, `especialidadid`, `horarioEntrada`, `horarioSalida`) VALUES
@@ -145,16 +208,16 @@ INSERT INTO `medico` (`medicoid`, `nombreMedico`, `especialidadid`, `horarioEntr
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE IF NOT EXISTS `roles` (
-`roleid` int(11) NOT NULL,
+CREATE TABLE `roles` (
+  `roleid` int(11) NOT NULL,
   `rolename` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`roleid`, `rolename`) VALUES
@@ -164,25 +227,25 @@ INSERT INTO `roles` (`roleid`, `rolename`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tblreseteopass`
+-- Table structure for table `tblreseteopass`
 --
 
-CREATE TABLE IF NOT EXISTS `tblreseteopass` (
-`id` int(10) unsigned NOT NULL,
-  `idusuario` int(10) unsigned NOT NULL,
+CREATE TABLE `tblreseteopass` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `idusuario` int(10) UNSIGNED NOT NULL,
   `username` varchar(15) NOT NULL,
   `token` varchar(200) NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario` (
-`usuarioid` int(11) NOT NULL,
+CREATE TABLE `usuario` (
+  `usuarioid` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `clave` varchar(50) NOT NULL,
@@ -192,89 +255,124 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `localidad` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `roleid` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`usuarioid`, `nombre`, `correo`, `clave`, `foto`, `sexo`, `provincia`, `localidad`, `direccion`, `roleid`) VALUES
 (26, 'Leandro Baldassarre', 'lea_Eldoc@hotmail.com', '418d940643b1975d62234ee01246ad4b58904184', 'lea_Eldoc@hotmail.com.jpg', 'M', 'buenos aires', 'berazategui', 'antartida argentina 451', 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `consulta`
+-- Indexes for table `consulta`
 --
 ALTER TABLE `consulta`
- ADD PRIMARY KEY (`consultaid`);
+  ADD PRIMARY KEY (`consultaid`);
 
 --
--- Indices de la tabla `especialidad`
+-- Indexes for table `especialidad`
 --
 ALTER TABLE `especialidad`
- ADD PRIMARY KEY (`especialidadid`);
+  ADD PRIMARY KEY (`especialidadid`);
 
 --
--- Indices de la tabla `medico`
+-- Indexes for table `fecha`
+--
+ALTER TABLE `fecha`
+  ADD PRIMARY KEY (`fechaid`);
+
+--
+-- Indexes for table `fechahoramedico`
+--
+ALTER TABLE `fechahoramedico`
+  ADD PRIMARY KEY (`fechahoramedicoid`,`medicoid`,`horarioid`,`fechaid`);
+
+--
+-- Indexes for table `horario`
+--
+ALTER TABLE `horario`
+  ADD PRIMARY KEY (`horaid`);
+
+--
+-- Indexes for table `medico`
 --
 ALTER TABLE `medico`
- ADD PRIMARY KEY (`medicoid`);
+  ADD PRIMARY KEY (`medicoid`);
 
 --
--- Indices de la tabla `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
- ADD PRIMARY KEY (`roleid`);
+  ADD PRIMARY KEY (`roleid`);
 
 --
--- Indices de la tabla `tblreseteopass`
+-- Indexes for table `tblreseteopass`
 --
 ALTER TABLE `tblreseteopass`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idusuario` (`idusuario`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idusuario` (`idusuario`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
- ADD PRIMARY KEY (`usuarioid`), ADD UNIQUE KEY `correo` (`correo`);
+  ADD PRIMARY KEY (`usuarioid`),
+  ADD UNIQUE KEY `correo` (`correo`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `consulta`
+-- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-MODIFY `consultaid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consultaid` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `especialidad`
+-- AUTO_INCREMENT for table `especialidad`
 --
 ALTER TABLE `especialidad`
-MODIFY `especialidadid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `especialidadid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT de la tabla `medico`
+-- AUTO_INCREMENT for table `fecha`
+--
+ALTER TABLE `fecha`
+  MODIFY `fechaid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `fechahoramedico`
+--
+ALTER TABLE `fechahoramedico`
+  MODIFY `fechahoramedicoid` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `horario`
+--
+ALTER TABLE `horario`
+  MODIFY `horaid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT for table `medico`
 --
 ALTER TABLE `medico`
-MODIFY `medicoid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
+  MODIFY `medicoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
--- AUTO_INCREMENT de la tabla `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-MODIFY `roleid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `roleid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `tblreseteopass`
+-- AUTO_INCREMENT for table `tblreseteopass`
 --
 ALTER TABLE `tblreseteopass`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-MODIFY `usuarioid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `usuarioid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

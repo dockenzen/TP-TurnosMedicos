@@ -51,7 +51,7 @@ class medico
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodosLosMedicosPorEspecialidad($idd)");
 		$consulta->execute();
-		return $consulta->fetchAll(PDO::FETCH_CLASS, "medico");	
+		return $consulta->fetchAll(PDO::FETCH_CLASS, "medico");
 	}
 
 	public function GuardarMedico()
@@ -60,19 +60,19 @@ class medico
 	 	{
 	 		$this->ModificarMedico();
 	 	}
-	 	else 
+	 	else
 	 	{
 	 		$this->InsertarMedico();
 	 	}
 	}
-	public static function TraerHorariosPorMedico($id)
+	public static function TraerHorarioDelMedico($id)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerHorariosPorMedico($id)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT horarioEntrada,horarioSalida FROM medico where medicoid = $id");
 		$consulta->execute();
 		return $consulta->fetch_array();
 	}
-	
+
 }
 
 ?>

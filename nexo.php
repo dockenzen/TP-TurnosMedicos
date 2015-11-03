@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("clases/AccesoDatos.php");
 require_once("clases/usuario.php");
 require_once("clases/especialidad.php");
@@ -43,12 +43,12 @@ switch ($queHago) {
 			$ruta=getcwd();  //ruta directorio actual
     		$ruta=$ruta."\\imagenes\\Fotos\\".$user->foto
     		;
-			if (is_file($ruta)) 
-			{ 
-				unlink($ruta); 				
-			}			
+			if (is_file($ruta))
+			{
+				unlink($ruta);
+			}
 			$cantidad=$user->BorrarUsuario();
-			echo $cantidad;			
+			echo $cantidad;
 		break;
 	case 'GuardarUsuario':
 			include("php/GuardarUsuario.php");
@@ -62,7 +62,7 @@ switch ($queHago) {
 			$consu->horarioConsulta=$_POST['horarioFinal'];
 			$reto = $consu->InsertarConsulta();
 			return $reto;
-   		break;   		
+   		break;
 	case 'TraerUsuario':
 			$user = usuario::TraerUnUsuario($_POST['id']);
 			echo json_encode($user);
@@ -111,13 +111,16 @@ switch ($queHago) {
 	case 'BorrarMedico':
 		$user = medico::TraerUnMedico($_POST['id']);
 		$cantidad=$user->BorrarMedico();
-		echo $cantidad;			
+		echo $cantidad;
 		break;
     case 'olvidoContra':
     	include("partes/olvidoPass.php");
     break;
+	 case 'horariosMedico':
+			include("partes/horariosMedico.php");
+		break;
 
-    
+
 
 	default:
 		# code...

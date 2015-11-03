@@ -56,7 +56,7 @@ function GuardarUsuario()
 {
 	    cargar();
 	    var envio = new FormData();
-    	    var files = $("#fichero").get(0).files; // $("#fichero") slector por id de jquery 
+    	    var files = $("#fichero").get(0).files; // $("#fichero") slector por id de jquery
             envio.append("correo", $("#correo").val());
             envio.append("clave", $("#clave").val());
             envio.append("nombre", $("#nombre").val());
@@ -65,7 +65,7 @@ function GuardarUsuario()
             envio.append("direccion", $("#direccion").val());
             envio.append("id", $("#id").val());
             envio.append("sexo", $('input:radio[name=sexo]:checked').val());
-   
+
             for (var i = 0; i < files.length; i++)
             {
             envio.append("fichero0", files[i]);
@@ -112,7 +112,7 @@ function VerEnMapa(prov, dire, loc, id)
 	});
 }
 function cargar(){
-    var files = $("#fichero").get(0).files; // $("#fichero") slector por id de jquery  
+    var files = $("#fichero").get(0).files; // $("#fichero") slector por id de jquery
     var envio = new FormData();
     for (var i = 0; i < files.length; i++) {
     envio.append("fichero0", files[i]);
@@ -127,9 +127,9 @@ function cargar(){
             cache: false,
             dataType: "text"
           });// fin del ajax
-            
+
     // la funcion Ajax me devuelve una promesa de javascript, algo que va a hacerse. Cuando el servidor responde y si la respuesta del servidor es exitosa ingresa al done y ejecuta la función que se le pasa
-    promise.done(function (dato){ 
+    promise.done(function (dato){
     	//alert(dato);
                     $('#error').hide();
                     console.log(dato);
@@ -171,9 +171,9 @@ function BorrarMedico(idParametro)
 function EditarMedico(idParametro)
 {
 	MostrarMedicos('MostrarFormAltaMedicos');
-	//esto tendria que estar dentro de una funcion ajax para que se ejecute 
+	//esto tendria que estar dentro de una funcion ajax para que se ejecute
 	//antes que la funcion ajax de traer medico
-	
+
 	var funcionAjax=$.ajax({
 
 		url:"nexo.php",
@@ -188,7 +188,7 @@ function EditarMedico(idParametro)
 	funcionAjax.done(function(retorno){
 
 		var retorno = JSON.parse(retorno);
-		
+
 		$("#medicoid").val(retorno.medicoid);
 		$("#nombreMedico").val(retorno.nombreMedico);
 		$("#especialidadid").val(retorno.especialidadid);
@@ -217,7 +217,7 @@ function GuardarMedico()
 
 	});
 	funcionAjax.done(function(retorno){
-		alert(retorno);
+		//alert(retorno);
 		alert("Medico creado con exito !");
 			//deslogear();
 		$("#informe").html("cantidad de agregados "+ retorno);
@@ -226,8 +226,9 @@ function GuardarMedico()
 	funcionAjax.fail(function(retorno){
 		alert("Error al crear al medico");
 		$("#informe").html(retorno.responseText);
-	});
-	MostrarLogin();
+	});}
+	  Mostrar('horariosMedico');
+	//MostrarLogin();
 }
 function GuardarConsulta()
 {
