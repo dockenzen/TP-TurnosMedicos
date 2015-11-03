@@ -6,10 +6,11 @@
 $("#content").css("width", "500px");
 </script>
 <?php 
+session_start();
           require_once("clases/AccesoDatos.php");
           require_once("clases/especialidad.php");
-          $arrayEspecialidades = especialidad::TraerTodasLasEspecialidades();
-session_start();
+$arrayEspecialidades = especialidad::TraerTodasLasEspecialidades();
+
 if(isset($_SESSION['administrador'])){  ?>
     <div class="container">
 
@@ -29,12 +30,22 @@ if(isset($_SESSION['administrador'])){  ?>
         }
         echo "</select>";
 ?>        
+        <br>
+        <label for="dia">Dia</label>
+        <select id="dia" class='form-control' required="">
+        <option value='1'>Lunes</option>
+        <option value='2'>Martes</option>
+        <option value='3'>Miercoles</option>
+        <option value='4'>Jueves</option>
+        <option value='5'>Viernes</option>
+        </select>
+
         <br>                
-        <label for="horarioEntrada">Horario de Entrada Laboral</label>
+        <label for="horarioEntrada" >Horario de Entrada Laboral</label>
                 <input type="time" id="horarioEntrada" class="form-control" required="" >
         <br>
         <label for="horarioSalida">Horario de Salida Laboral</label>
-                <input type="time" valign="middle" id="horarioSalida" class="form-control" required="">
+                <input type="time" id="horarioSalida" class="form-control" required="">
         <br>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>

@@ -14,17 +14,24 @@ function MostrarError()
 		//alert("siempre "+retorno.statusText);
 	});
 }
-function MostrarSinParametros()
+function MostrarMedicos(queMostrar)
 {
-	var funcionAjax=$.ajax({url:"nexoTexto.php"});
+
+	var queHacer=queMostrar;
+	var funcionAjax=$.ajax({
+		url:"nexo.php",
+		async:false,
+		type:"post",
+		data:{queHacer:queMostrar}
+		});
 
 	funcionAjax.done(function(retorno){
 		$("#principal").html(retorno);
-		$("#sidebar").html("Correcto!!!");
+		//$("#sidebar").html("Correcto!!!");
 	});
 	funcionAjax.fail(function(retorno){
 		$("#principal").html(":(");
-		$("#sidebar").html(retorno.responseText);
+		//$("#sidebar").html(retorno.responseText);
 	});
 	funcionAjax.always(function(retorno){
 		//alert("siempre "+retorno.statusText);
@@ -176,3 +183,23 @@ function RestablecerPass($token, $idusuario)
 		$("#informe").html(retorno.responseText);
 	});
 }*/
+function TraerClima()
+{
+	var funcionAjax =$.ajax({
+		url:'TraerClima.php'
+	});
+	funcionAjax.done(function(retorno)
+	{
+		$("#noticias").html(retorno);
+		//$("#imagenClima").src=retorno;
+		//alert(retorno);
+	});
+	funcionAjax.fail(function(retorno)
+	{
+		//alert(retorno);
+	});
+	funcionAjax.always(function(retorno)
+	{
+		//alert(retorno);
+	});
+}

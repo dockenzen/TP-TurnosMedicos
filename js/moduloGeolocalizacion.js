@@ -78,7 +78,7 @@ Geolocalizacion.Marcador = Geolocalizacion.Marcador || {};
 
     self.verMarcador = function verMarcador(){
 
-        var nombre = "voto: " + $("#id").val();
+        var nombre = "usuario: " + $("#id").val();
         var dire = $("#punto").val();
         
        

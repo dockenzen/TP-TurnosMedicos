@@ -32,7 +32,7 @@
 
 </head>
 
-<body>
+<body onload="TraerClima()">
 
 <?php
 session_start();
@@ -47,6 +47,14 @@ session_start();
 			<h1 id="site-logo"><a href="#">Pami para programadores</a></h1>
 			<h2 id="site-description">Un lugar igual a otros, solo que mas lindo.</h2>
 		</hgroup>
+		<section >
+			<h8 class="widClima">				
+				<ul>
+					<li>Temperatura <h6 id="temp"></h5></li>
+					<li>Ciudad <h8 id="temp"></li>
+				</ul>	
+			</h8>
+		</section>
 
 		<nav>
 			<ul id="main-nav" class="clearfix">
@@ -93,7 +101,6 @@ session_start();
 	</div>
 	<!-- /#content --> 
 	
-	
 	<aside id="sidebar">
 
 		<div id="botonesABM">
@@ -103,7 +110,7 @@ session_start();
 
 		<section class="widget clearfix" >
 			<h4 class="widgettitle">Informe</h4>
-				<div id="Contador">
+				<div id="informe">
 				<!--contenido dinamico cargado por ajax-->
 				</div>
 			
@@ -112,6 +119,13 @@ session_start();
 						
 	</aside>
 	<!-- /#sidebar -->
+	<div id="content">
+			
+				<div  class="noti" id="noticias"  vertical-align="text-top">
+
+				</div>
+			
+	</div>
 
 	<footer id="footer">
 

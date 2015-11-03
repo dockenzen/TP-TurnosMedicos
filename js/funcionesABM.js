@@ -170,22 +170,25 @@ function BorrarMedico(idParametro)
 }
 function EditarMedico(idParametro)
 {
+	MostrarMedicos('MostrarFormAltaMedicos');
 	//esto tendria que estar dentro de una funcion ajax para que se ejecute 
 	//antes que la funcion ajax de traer medico
-    Mostrar('MostrarFormAltaMedicos');
-
+	
 	var funcionAjax=$.ajax({
 
 		url:"nexo.php",
 		type:"post",
+		async:false,
+		//tendria que ejecutarse antes del envio pero we... nose
 		data:{
-			queHacer:"TraerMedico",
-			id:idParametro
-		}
+				queHacer:"TraerMedico",
+				id:idParametro
+		     }
 	});
 	funcionAjax.done(function(retorno){
+
 		var retorno = JSON.parse(retorno);
-		alert(retorno.medicoid);
+		
 		$("#medicoid").val(retorno.medicoid);
 		$("#nombreMedico").val(retorno.nombreMedico);
 		$("#especialidadid").val(retorno.especialidadid);
