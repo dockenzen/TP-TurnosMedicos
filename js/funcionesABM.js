@@ -207,6 +207,7 @@ function GuardarMedico()
             envio.append("horarioEntrada", $("#horarioEntrada").val());
             envio.append("horarioSalida", $("#horarioSalida").val());
             envio.append("id", $("#id").val());
+						envio.append("dia", $("#dia").val());
 
 		var funcionAjax=$.ajax({
 		url:"php/GuardarMedico.php",
@@ -217,7 +218,7 @@ function GuardarMedico()
 
 	});
 	funcionAjax.done(function(retorno){
-		//alert(retorno);
+		alert(retorno);
 		alert("Medico creado con exito !");
 			//deslogear();
 		$("#informe").html("cantidad de agregados "+ retorno);
@@ -226,9 +227,8 @@ function GuardarMedico()
 	funcionAjax.fail(function(retorno){
 		alert("Error al crear al medico");
 		$("#informe").html(retorno.responseText);
-	});}
-	  Mostrar('horariosMedico');
-	//MostrarLogin();
+	});
+	MostrarLogin();
 }
 function GuardarConsulta()
 {

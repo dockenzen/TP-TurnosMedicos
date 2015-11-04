@@ -24,12 +24,24 @@ if(isset($_SESSION['administrador'])){  ?>
         <label for="especialidadid">Especialidad</label>
 <?php
         echo "<select id=especialidadid class='form-control'>";
+        echo "<option value='0'>Seleccione la especialidad</option>";
         foreach ($arrayEspecialidades as $espe)
         {
           echo "<option value='$espe->especialidadid'>$espe->nombre</option>";
         }
         echo "</select>";
 ?>
+        <br>
+        <label for="dia">Dia</label>
+        <select id="dia" class='form-control' required="">
+        <option value='0'>Seleccione un dia</option>
+        <option value='1'>Lunes</option>
+        <option value='2'>Martes</option>
+        <option value='3'>Miercoles</option>
+        <option value='4'>Jueves</option>
+        <option value='5'>Viernes</option>
+        </select>
+
         <br>
         <label for="horarioEntrada" >Horario de Entrada Laboral</label>
                 <input type="time" id="horarioEntrada" class="form-control" required="" >
