@@ -29,7 +29,7 @@ class medico
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `medico`(`nombreMedico`, `especialidadid`, `horarioEntrada`, `horarioSalida`) VALUES ('$this->nombre','$this->especialidadid','$this->horarioEntrada','$this->horarioSalida')");
 				$consulta->execute();
-				return $objetoAccesoDato->RetornarUltimoIdInsertado();
+				echo $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
   	public static function TraerTodosLosMedicos()
 	{
@@ -70,7 +70,7 @@ class medico
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT horarioEntrada,horarioSalida FROM medico where medicoid = $id");
 		$consulta->execute();
-		return $consulta->fetch_array();
+		return $consulta->fetchObject('medico');
 	}
 
 }

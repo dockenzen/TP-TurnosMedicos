@@ -47,7 +47,7 @@ if(isset($_SESSION['registrado']))
 
 	<div id="divSintoma" hidden>
 	      <label for="sintoma">Describa sus sintomas</label>
-	     	<textarea rows="4" cols="39" name="sintoma" id="sintoma" hidden>
+	     	<textarea rows="4" cols="39" name="sintoma" id="sintoma">
 		    </textarea >
 		    <br>
 	</div>
@@ -55,7 +55,7 @@ if(isset($_SESSION['registrado']))
         <input type="hidden" name="espeId" id="espeId" readonly>
         <input type="hidden" name="medId" id="medId" readonly>
         <input type="hidden" name="horarioFinal" id="horarioFinal" readonly>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Reservar</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" disabled id="botonSubmit">Reservar</button>
       </form>
     </div> <!-- /container -->
 

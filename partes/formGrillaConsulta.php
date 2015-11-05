@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if(isset($_SESSION['cliente']))
 {
@@ -24,10 +24,10 @@ $("#content").css("width", "1000px");
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 
-foreach ($arrayDeConsultas as $con) {
-  //  $l = '"'.$user->provincia. '"'.',"'.$user->direccion. '"'.',"'.$user->localidad. '"'.',"'.$user->usuarioid. '"';
+foreach ($arrayDeConsultas as $con)
+{
 	echo"<tr>
 			<td>$con->nombre</td>
 			<td>$med->nombreMedico</td>

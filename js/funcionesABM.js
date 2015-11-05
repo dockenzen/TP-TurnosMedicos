@@ -171,15 +171,11 @@ function BorrarMedico(idParametro)
 function EditarMedico(idParametro)
 {
 	MostrarMedicos('MostrarFormAltaMedicos');
-	//esto tendria que estar dentro de una funcion ajax para que se ejecute
-	//antes que la funcion ajax de traer medico
-
 	var funcionAjax=$.ajax({
 
 		url:"nexo.php",
 		type:"post",
 		async:false,
-		//tendria que ejecutarse antes del envio pero we... nose
 		data:{
 				queHacer:"TraerMedico",
 				id:idParametro
@@ -236,18 +232,19 @@ function GuardarConsulta()
             envio.append("sintoma", $("#sintoma").val());
             envio.append("espeId", $("#espeId").val());
             envio.append("medId", $("#medId").val());
-            envio.append("horarioConsulta", $("#horarioConsulta").val());
+            envio.append("horarioFinal", $("#horarioFinal").val());
             envio.append("usuarioid", $("#usuarioid").val());
+						envio.append("queHacer", "GuardarConsulta");
 
 		var funcionAjax=$.ajax({
 		queHacer:'GuardarConsulta',
 		url:"nexo.php",
 		type:"POST",
 		contentType: false,
-    	processData: false,
+    processData: false,
 		data:envio
+		});
 
-	});
 	funcionAjax.done(function(retorno){
 		alert(retorno);
 		alert("Consulta generada con exito !");

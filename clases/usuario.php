@@ -70,12 +70,12 @@ class usuario
 			$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerUnUsuarioPorCorreo('$correo')");
 			$consulta->execute();
 			$usuarioBuscado= $consulta->fetchObject('usuario');
-			return $usuarioBuscado;	
+			return $usuarioBuscado;
 	}
 	public static function ValidarUsuario($usuario,$clave)
     {
     		$claveCifrada = sha1($clave);
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where correo = '$usuario' and clave ='$claveCifrada'");
             $consulta->execute();
             return $consulta->rowCount();

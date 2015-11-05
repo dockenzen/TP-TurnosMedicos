@@ -3,6 +3,7 @@ require_once("clases/AccesoDatos.php");
 require_once("clases/usuario.php");
 require_once("clases/especialidad.php");
 require_once("clases/medico.php");
+require_once("clases/consulta.php");
 
 
 $queHago=$_POST['queHacer'];

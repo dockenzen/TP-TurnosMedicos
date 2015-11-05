@@ -108,6 +108,7 @@ function ElegirEspecialidad()
    		else
    		{
    			document.getElementById('divMedico').style.display = "none";
+				document.getElementById('botonSubmit').disabled = true;
    		}
 
 }
@@ -135,8 +136,31 @@ function ElegirMedico()
 	else
 	{
 	document.getElementById('divHorario').style.display = "none";
+	document.getElementById('botonSubmit').disabled = true;
 	}
 }
+function ElegirDia()
+{
+	var valor = $("#horarioConsulta").val();
+ 	$("#horarioFinal").val(valor);
+
+	if(valor != 0)
+	{
+	document.getElementById('divSintoma').style.display = "inherit";
+	}
+	else
+	{
+	document.getElementById('divSintoma').style.display = "none";
+	document.getElementById('botonSubmit').disabled = true;
+	}
+	if($("#especialidad").val() != 0 && $("#medico").val() != 0 && $("#horarioConsulta").val() != 0)
+	{
+		document.getElementById('botonSubmit').disabled = false;
+	}
+}
+
+
+
 function ElegirHorario()
 {
 	var valor = $("#horarioConsulta").val();
@@ -149,6 +173,11 @@ function ElegirHorario()
 	else
 	{
 	document.getElementById('divSintoma').style.display = "none";
+	document.getElementById('botonSubmit').disabled = true;
+	}
+	if($("#especialidad").val() != 0 && $("#medico").val() != 0 && $("#horarioConsulta").val() != 0)
+	{
+		document.getElementById('botonSubmit').disabled = false;
 	}
 }
 

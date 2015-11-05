@@ -2,6 +2,8 @@
 session_start();
 		require_once"../clases/medico.php";
 		require_once"../clases/AccesoDatos.php";
+		require_once"../clases/horario.php";
+		require_once"../clases/fechahoramedico.php";
 
 		$in = ($_POST["horarioEntrada"]);
 		$hora = ($_POST['horarioSalida']);
@@ -15,20 +17,13 @@ session_start();
         $med->especialidadid=$_POST['especialidadid'];
         $med->horarioEntrada=$in;
         $med->horarioSalida=$hora;
-      	$cantidad=$med->GuardarMedico();
+      	$medId = $med->GuardarMedico();
+				//que me traiga el ultimo id insertado lpm !"$&#$!
 
-				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-				$medId = $objetoAccesoDato->RetornarUltimoIdInsertado();
-
-return $medId;
-	       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT horaid FROM horario WHERE hora BETWEEN '$in' and '$hora'");
-	       $consulta->execute();
-	       $arrayHorario = $consulta->fetch_array();
+				$arrayHorario = horario::TraerTodosLosHorarios($in,$hora);
 
 	       foreach ($arrayHorario as $hora)
 				 {
-	       			$objetoAccesoDato->RetornarConsulta("INSERT INTO fechahoramedico (medicoid,horarioid,fechaid) VALUES ($medId,$hora[0],$dia)");
-							$objetoAccesoDato->execute();
+					 	fechahoramedico::InsertarFechaHoraMedico($medId,$hora->horaid,$dia);
 	       }
-				 echo "Tosli";
 ?>
