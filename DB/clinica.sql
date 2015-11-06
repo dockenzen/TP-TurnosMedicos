@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2015 at 11:33 PM
+-- Generation Time: Nov 06, 2015 at 09:42 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -30,8 +30,8 @@ DELETE FROM medico WHERE medicoid = idd$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BorrarUsuario` (IN `id` INT)  NO SQL
 DELETE FROM usuario WHERE usuarioid = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarConsulta` (IN `userid` INT, IN `medid` INT, IN `espeid` INT, IN `horacon` VARCHAR(50), IN `sint` TEXT)  NO SQL
-INSERT INTO `consulta`(`usuarioid`, `medicoid`, `especialidadid`, `horarioConsulta`, `sintomas`) VALUES (userid,medid,espeid,horacon,sint)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarConsulta` (IN `userid` INT, IN `medid` INT, IN `espeid` INT, IN `horacon` VARCHAR(50), IN `sint` TEXT, IN `fechaid` INT)  NO SQL
+INSERT INTO `consulta`(`usuarioid`, `medicoid`, `especialidadid`, `horarioConsulta`, `sintomas`,`fechaid`) VALUES (userid,medid,espeid,horacon,sint,fechaid)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarUsuario` (IN `name` VARCHAR(50), IN `mail` VARCHAR(50), IN `pass` VARCHAR(50), IN `pick` VARCHAR(100), IN `sex` CHAR(1), IN `prov` VARCHAR(50), IN `loc` VARCHAR(50), IN `dir` VARCHAR(50))  NO SQL
 INSERT INTO `usuario`( `nombre`,`correo`, `clave`,`foto`,`sexo`, `provincia`, `localidad`, `direccion`) VALUES ( name , mail , pass ,pick,sex, prov , loc , dir)$$
@@ -41,11 +41,7 @@ UPDATE `usuario` SET `nombre`=name,`correo`=mail,`clave`=pass,`foto`=pick,`sexo`
 `provincia`=prov,`localidad`=loc,`direccion`=dir WHERE usuarioid = idd$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodasLasConsultasPorUsuario` (IN `userid` INT)  NO SQL
-SELECT usuario.nombre, medico.nombreMedico as medico, especialidad.nombre as especialidad, consulta.horarioConsulta, consulta.sintomas 
-from consulta inner join usuario on consulta.usuarioid = usuario.usuarioid
-			  inner join medico on consulta.medicoid = medico.medicoid
-              inner join especialidad on consulta.especialidadid = especialidad.especialidadid              
-where consulta.usuarioid = userid$$
+SELECT usuario.nombre, medico.nombreMedico as medico, especialidad.nombre as especialidad, horario.hora, consulta.sintomas, fecha.dia from consulta inner join usuario on consulta.usuarioid = usuario.usuarioid inner join medico on consulta.medicoid = medico.medicoid inner join especialidad on consulta.especialidadid = especialidad.especialidadid inner join fecha on consulta.fechaid = fecha.fechaid inner join horario on consulta.horarioConsulta = horario.horaid where consulta.usuarioid = userid$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodasLasEspecialidades` ()  NO SQL
 SELECT * FROM especialidad$$
@@ -57,7 +53,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosMedicosPorEspecialidad
 SELECT * FROM medico where especialidadid = idd$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerTodosLosUsuarios` ()  NO SQL
-SELECT * FROM usuario$$
+SELECT *,roles.rolename FROM usuario INNER JOIN roles on usuario.roleid = roles.roleid$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TraerUnMedico` (IN `idd` INT)  NO SQL
 SELECT * FROM medico WHERE medicoid = idd$$
@@ -82,7 +78,8 @@ CREATE TABLE `consulta` (
   `medicoid` int(11) NOT NULL,
   `especialidadid` int(11) NOT NULL,
   `horarioConsulta` varchar(50) NOT NULL,
-  `sintomas` text NOT NULL
+  `sintomas` text NOT NULL,
+  `fechaid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -203,7 +200,9 @@ CREATE TABLE `medico` (
 
 INSERT INTO `medico` (`medicoid`, `nombreMedico`, `especialidadid`, `horarioEntrada`, `horarioSalida`) VALUES
 (47, 'Pepe, Pompin', 4, '22:00:00', '11:00:00'),
-(53, 'Juan Carlos, Alonso', 2, '14:00:00', '22:00:00');
+(53, 'Juan Carlos, Alonso', 2, '14:00:00', '22:00:00'),
+(55, 'Ayala, Landriel', 5, '10:00:00', '18:00:00'),
+(61, 'catriel miryan', 5, '12:00:00', '20:00:00');
 
 -- --------------------------------------------------------
 
@@ -332,7 +331,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `consultaid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consultaid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `especialidad`
 --
@@ -347,7 +346,7 @@ ALTER TABLE `fecha`
 -- AUTO_INCREMENT for table `fechahoramedico`
 --
 ALTER TABLE `fechahoramedico`
-  MODIFY `fechahoramedicoid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fechahoramedicoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `horario`
 --
@@ -357,7 +356,7 @@ ALTER TABLE `horario`
 -- AUTO_INCREMENT for table `medico`
 --
 ALTER TABLE `medico`
-  MODIFY `medicoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `medicoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `roles`
 --

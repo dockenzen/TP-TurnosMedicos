@@ -29,6 +29,10 @@
 <script type="text/javascript" src="js/moduloGeolocalizacion.js"></script>
 <script type="text/javascript" src="js/geolocalizacionCommon.js"></script>
 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 
 </head>
 
@@ -62,8 +66,7 @@ session_start();
 				<li><a onclick="Mostrar('registro')" class="btn">Registro</a> </li>				
 				<li><a onclick="Mostrar('MostrarFormConsulta')" class="btn">Gestion de Consultas</a> </li>
 				<li><a onclick="Mostrar('MostrarGrillaConsulta')" class="btn">Su historial de Consultas</a> </li>				
-				<li><a onclick="Mostrar('MostrarGrillaMedicos')" class="btn">Listado de Doctores</a> </li>
-				<li> </li>
+				<li><a onclick="Mostrar('MostrarGrillaMedicos')" class="btn">Listado de Doctores</a> </li>				
 				<li><a valign="right" onclick="deslogear()" class="btn">Desloguearse</a> </li>
 				
 			</ul>
@@ -119,8 +122,8 @@ session_start();
 						
 	</aside>
 	<!-- /#sidebar -->
-	<div id="content">
-			
+	<div id="content2">
+			<label><H1><u>En las noticias !</u></H1></label>
 				<div  class="noti" id="noticias"  vertical-align="text-top">
 
 				</div>

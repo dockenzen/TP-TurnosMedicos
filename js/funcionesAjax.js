@@ -46,6 +46,7 @@ function Mostrar(queMostrar)
 		data:{queHacer:queMostrar}
 	});
 	funcionAjax.done(function(retorno){
+
 		$("#principal").html(retorno);
 		//$("#sidebar").html("Correcto!!!");
 	});
@@ -118,45 +119,57 @@ function ElegirMedico()
  	$("#medId").val(valor);
 
 	var funcionAjax = $.ajax({
-			url: 'partes/horariosDisponibles.php',
+			url: 'partes/diasMedico.php',
 			type: 'POST',
 			async: true,
 			data: {valor:valor}
 		});
 
-        funcionAjax.done(function(retorno){
-		$("#divHorario").html(retorno);
-		$("#informe").html("Seleccion de horario");
+    funcionAjax.done(function(retorno){
+		$("#divDia").html(retorno);
+		$("#informe").html("Seleccion de dia");
 		});
 
 	if(valor != 0)
 	{
-	document.getElementById('divHorario').style.display = "inherit";
+	document.getElementById('divDia').style.display = "inherit";
 	}
 	else
 	{
-	document.getElementById('divHorario').style.display = "none";
+	document.getElementById('divDia').style.display = "none";
 	document.getElementById('botonSubmit').disabled = true;
 	}
 }
 function ElegirDia()
 {
-	var valor = $("#horarioConsulta").val();
- 	$("#horarioFinal").val(valor);
 
-	if(valor != 0)
-	{
-	document.getElementById('divSintoma').style.display = "inherit";
-	}
-	else
-	{
-	document.getElementById('divSintoma').style.display = "none";
-	document.getElementById('botonSubmit').disabled = true;
-	}
-	if($("#especialidad").val() != 0 && $("#medico").val() != 0 && $("#horarioConsulta").val() != 0)
-	{
-		document.getElementById('botonSubmit').disabled = false;
-	}
+	var valor = $("#dia").val();
+	var medId = $("#medId").val();
+ 	$("#fechaid").val(valor);
+
+	//horariosDisponibles
+	var funcionAjax = $.ajax({
+			url: 'partes/horariosDisponibles.php',
+			type: 'POST',
+			async: true,
+			data: {valor:valor,
+						 medId:medId
+					  }
+		});
+
+    funcionAjax.done(function(retorno){
+		$("#divHorario").html(retorno);
+		$("#informe").html("Seleccion de horario");
+		});
+		if(valor != 0)
+		{
+		document.getElementById('divHorario').style.display = "inherit";
+		}
+		else
+		{
+		document.getElementById('divHorario').style.display = "none";
+		document.getElementById('botonSubmit').disabled = true;
+		}
 }
 
 
@@ -175,7 +188,8 @@ function ElegirHorario()
 	document.getElementById('divSintoma').style.display = "none";
 	document.getElementById('botonSubmit').disabled = true;
 	}
-	if($("#especialidad").val() != 0 && $("#medico").val() != 0 && $("#horarioConsulta").val() != 0)
+
+	if($("#especialidad").val() != 0 && $("#medico").val() != 0 && $("#horarioConsulta").val() != 0 && $("#dia").val() != 0)
 	{
 		document.getElementById('botonSubmit').disabled = false;
 	}
@@ -220,8 +234,13 @@ function TraerClima()
 	funcionAjax.done(function(retorno)
 	{
 		$("#noticias").html(retorno);
-		//$("#imagenClima").src=retorno;
-		//alert(retorno);
+
+    $("#noticias").each(function (index)
+        {
+        	//remuevo las imagenes de mas y los espaciosssss
+            $("img").remove();
+            $("br").remove();
+        })
 	});
 	funcionAjax.fail(function(retorno)
 	{

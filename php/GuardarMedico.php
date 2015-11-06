@@ -12,7 +12,10 @@ session_start();
 		$dia = $_POST['dia'];
 
         $med= new medico();
-        $med->medicoid = $_POST['medicoid'];
+				if(isset($_POST['medicoid']))
+				{
+        	$med->medicoid = $_POST['medicoid'];
+				}
         $med->nombre=$_POST['nombreMedico'];
         $med->especialidadid=$_POST['especialidadid'];
         $med->horarioEntrada=$in;
@@ -20,10 +23,11 @@ session_start();
       	$medId = $med->GuardarMedico();
 				//que me traiga el ultimo id insertado lpm !"$&#$!
 
-				$arrayHorario = horario::TraerTodosLosHorarios($in,$hora);
+		$arrayHorario = horario::TraerTodosLosHorarios($in,$hora);
 
 	       foreach ($arrayHorario as $hora)
-				 {
-					 	fechahoramedico::InsertarFechaHoraMedico($medId,$hora->horaid,$dia);
+	  	   {
+				fechahoramedico::InsertarFechaHoraMedico($medId,$hora->horaid,$dia);
 	       }
+	       echo $medId;
 ?>

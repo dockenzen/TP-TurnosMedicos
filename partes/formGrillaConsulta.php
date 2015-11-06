@@ -1,10 +1,11 @@
 <?php
-session_start();
-if(isset($_SESSION['cliente']))
-{
 	require_once("clases/AccesoDatos.php");
 	require_once("clases/consulta.php");
 	require_once("clases/usuario.php");
+
+session_start();
+if(isset($_SESSION['cliente']) || isset($_SESSION['administrador']))
+{
 
 	$user = usuario::TraerUnUsuarioPorCorreo($_SESSION['registrado']);
 
@@ -20,7 +21,7 @@ $("#content").css("width", "1000px");
 <table class="table" style=" background-color: beige;">
 	<thead>
 		<tr>
-			<th>Paciente</th><th>Doctor</th><th>Especialidad</th><th>Horario</th><th>Motivo</th>
+			<th>Paciente</th><th>Doctor</th><th>Especialidad</th><th>Dia</th><th>Horario</th><th>Motivo</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,13 +29,15 @@ $("#content").css("width", "1000px");
 
 foreach ($arrayDeConsultas as $con)
 {
-	echo"<tr>
+	echo"
+			<tr>
 			<td>$con->nombre</td>
-			<td>$med->nombreMedico</td>
-			<td>$med->especialidad</td>
-            <td>$med->horarioConsulta</td>
-            <td>$med->sintomas</td>
-		</tr>  ";
+			<td>$con->medico</td>
+			<td>$con->especialidad</td>
+			<td>$con->dia </td>
+      <td>$con->hora hs.</td>
+      <td>$con->sintomas</td>
+			</tr>  ";
 }		?>
 	</tbody>
 </table>

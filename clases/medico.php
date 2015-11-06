@@ -11,10 +11,13 @@ class medico
 	public function BorrarMedico()
 	{
 	 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-			$consulta =$objetoAccesoDato->RetornarConsulta("CALL BorrarMedico(:idd)");
-				$consulta->bindValue(':idd',$this->medicoid, PDO::PARAM_INT);
-				$consulta->execute();
-				return $consulta->rowCount();
+			$anteconsulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM fechahoramedico WHERE medicoid = $this->medicoid");
+			$anteconsulta->execute();
+
+			$consulta = $objetoAccesoDato->RetornarConsulta("CALL BorrarMedico(:idd)");
+			$consulta->bindValue(':idd',$this->medicoid, PDO::PARAM_INT);
+			$consulta->execute();
+			return $consulta->rowCount();
 	}
 
 	public function ModificarMedico()
@@ -29,7 +32,7 @@ class medico
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO `medico`(`nombreMedico`, `especialidadid`, `horarioEntrada`, `horarioSalida`) VALUES ('$this->nombre','$this->especialidadid','$this->horarioEntrada','$this->horarioSalida')");
 				$consulta->execute();
-				echo $objetoAccesoDato->RetornarUltimoIdInsertado();
+				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
   	public static function TraerTodosLosMedicos()
 	{
@@ -62,16 +65,19 @@ class medico
 	 	}
 	 	else
 	 	{
-	 		$this->InsertarMedico();
+	 		return $this->InsertarMedico();
 	 	}
 	}
-	public static function TraerHorarioDelMedico($id)
-	{
-		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT horarioEntrada,horarioSalida FROM medico where medicoid = $id");
-		$consulta->execute();
-		return $consulta->fetchObject('medico');
-	}
+
+
+	public static function TraerEstadisticas()
+    {
+      $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+			$consulta =$objetoAccesoDato->RetornarConsulta("select count(*) as CantidadCd, nombreMedico as Cantante from medico group by nombreMedico order by CantidadCd desc limit 5");
+			$consulta->execute();
+      		return $consulta->fetchAll();
+    }
+
 
 }
 

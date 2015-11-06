@@ -7,6 +7,7 @@ foreach($articulos->channel->item as $noticia)
 	echo "    
         <h1><a href=$noticia->link>$noticia->title</a></h1>
         $noticia->description
+        
     	 ";
     $num_noticia++;
     if($num_noticia > $max_noticias)

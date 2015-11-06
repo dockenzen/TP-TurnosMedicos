@@ -1,25 +1,25 @@
-<?php 
+<?php
 session_start();
 if(isset($_SESSION['administrador']))
 {
 	require_once("clases/AccesoDatos.php");
 	require_once("clases/usuario.php");
-	
+
 	$arrayDeUsuarios=usuario::TraerTodosLosUsuarios();
 
  ?>
 <script type="text/javascript">
-$("#content").css("width", "1000px");
+$("#content").css("width", "1050px");
 </script>
 
-<table class="table" style=" background-color: beige;">
+<table class="table" style=" background-color: beige;" >
 	<thead>
 		<tr>
-			<th>Editar</th><th>Borrar</th><th>Nombre</th><th>Correo</th><th>Foto</th><th>Direccion</th><th>Localidad</th><th>Provincia</th><th>Ver en Mapa</th>
+			<th>Editar</th><th>Borrar</th><th>Nombre</th><th>Correo</th><th>Foto</th><th>Direccion</th><th>Localidad</th><th>Provincia</th><th>Ver en Mapa</th><th>Rol</th>
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 
 foreach ($arrayDeUsuarios as $user) {
     $l = '"'.$user->provincia. '"'.',"'.$user->direccion. '"'.',"'.$user->localidad. '"'.',"'.$user->usuarioid. '"';
@@ -33,6 +33,7 @@ foreach ($arrayDeUsuarios as $user) {
             <td>$user->localidad</td>
             <td>$user->provincia</td>
             <td><a onclick='VerEnMapa($l)' class='btn btn-info'>Ver en mapa</a></td>
+						<td>$user->rolename</td>
 		</tr>  ";
 }		?>
 	</tbody>

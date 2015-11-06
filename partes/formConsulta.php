@@ -40,6 +40,10 @@ if(isset($_SESSION['registrado']))
 
 
   </div>
+	<div id="divDia" hidden>
+
+
+	</div>
   <div id="divHorario" hidden>
 
 
@@ -54,6 +58,7 @@ if(isset($_SESSION['registrado']))
         <input type="hidden" name="usuarioid" id="usuarioid" value="<?php echo $user->usuarioid ?>" readonly>
         <input type="hidden" name="espeId" id="espeId" readonly>
         <input type="hidden" name="medId" id="medId" readonly>
+				<input type="hidden" name="fechaid" id="fechaid" readonly>
         <input type="hidden" name="horarioFinal" id="horarioFinal" readonly>
         <button class="btn btn-lg btn-primary btn-block" type="submit" disabled id="botonSubmit">Reservar</button>
       </form>

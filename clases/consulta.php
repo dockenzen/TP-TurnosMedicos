@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class consulta
 {
@@ -7,14 +7,14 @@ class consulta
 	public $medicoid;
 	public $especialidadid;
 	public $horarioConsulta;
+	public $fechaid;
 	public $sintomas;
 
 	public function InsertarConsulta()
 	{
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-				$consulta =$objetoAccesoDato->RetornarConsulta("
-					CALL InsertarConsulta('$this->usuarioid','$this->medicoid','$this->especialidadid',
-						'$this->horarioConsulta','$this->sintomas')");
+				$consulta =$objetoAccesoDato->RetornarConsulta("CALL InsertarConsulta('$this->usuarioid','$this->medicoid','$this->especialidadid',
+						'$this->horarioConsulta','$this->sintomas','$this->fechaid')");
 				$consulta->execute();
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}

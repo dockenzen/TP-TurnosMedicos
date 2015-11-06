@@ -234,6 +234,7 @@ function GuardarConsulta()
             envio.append("medId", $("#medId").val());
             envio.append("horarioFinal", $("#horarioFinal").val());
             envio.append("usuarioid", $("#usuarioid").val());
+						envio.append("fechaid", $("#fechaid").val());
 						envio.append("queHacer", "GuardarConsulta");
 
 		var funcionAjax=$.ajax({

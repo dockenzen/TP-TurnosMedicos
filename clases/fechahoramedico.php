@@ -11,7 +11,7 @@ class fechahoramedico
   public static function InsertarFechaHoraMedico($medId,$horaid,$dia)
   {
        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-       $objetoAccesoDato->RetornarConsulta("INSERT INTO fechahoramedico (medicoid,horarioid,fechaid) VALUES ($medId,$horaid,$dia)");
+       $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO fechahoramedico (medicoid,horarioid,fechaid) VALUES ($medId,$horaid,$dia)");
        $consulta->execute();
   }
 }

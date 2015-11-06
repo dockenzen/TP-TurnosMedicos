@@ -3,19 +3,18 @@
           require_once("../clases/medico.php");
 					require_once("../clases/horario.php");
 
-          $valor = $_POST["valor"];
-          $InOut = medico::TraerHorarioDelMedico($valor);
-					$entrada = $InOut->horarioEntrada;
-					$salida = $InOut->horarioSalida;
+          $dia = $_POST["valor"];
+					$medId = $_POST["medId"];
 
-					$arrayHorario = horario::TraerTodosLosHorarios($entrada,$salida);
+          $arrayHorario = horario::TraerHorarioDelMedico($medId,$dia);
+
 ?>
 				<br>
 				<label for="horarioConsulta">Horarios disponibles</label>
         <br>
 
 				<select id="horarioConsulta" class='form-control' onchange="ElegirHorario()">
-          <option value="0">Seleccione horario</option>"
+        <option value="0">Seleccione horario</option>"
 <?php   foreach ($arrayHorario as $hora)
         {
 					echo "<option value='$hora->horaid'>$hora->hora</option>";

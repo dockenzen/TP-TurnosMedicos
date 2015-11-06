@@ -13,7 +13,7 @@
           <option value="0">Seleccione un Doctor</option>"
 <?php     foreach ($arrayMedicos as $medi)
           {
-			echo "<option value='$medi->medicoid'>$medi->nombreMedico</option>";
-    	  }
+							echo "<option value='$medi->medicoid'>$medi->nombreMedico</option>";
+    	  	}
 ?>
         </select>

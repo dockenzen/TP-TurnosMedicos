@@ -21,6 +21,9 @@ switch ($queHago) {
 	case 'MostrarGrilla':
 			include("partes/formGrilla.php");
 		break;
+	case 'Estadisticas':
+			include("partes/estadisticas.php");
+		break;
 	case 'MostrarLogin':
 			include("partes/formLogin.php");
 		break;
@@ -55,12 +58,14 @@ switch ($queHago) {
 			include("php/GuardarUsuario.php");
    		break;
 	case 'GuardarConsulta':
+	var_dump($_POST);
 			$consu = new consulta();
 			$consu->sintomas=$_POST['sintoma'];
 			$consu->especialidadid=$_POST['espeId'];
 			$consu->medicoid=$_POST['medId'];
 			$consu->usuarioid=$_POST['usuarioid'];
 			$consu->horarioConsulta=$_POST['horarioFinal'];
+			$consu->fechaid=$_POST['fechaid'];
 			$reto = $consu->InsertarConsulta();
 			return $reto;
    		break;
@@ -120,9 +125,7 @@ switch ($queHago) {
 	 case 'horariosMedico':
 			include("partes/horariosMedico.php");
 		break;
-
-
-
+		
 	default:
 		# code...
 		break;

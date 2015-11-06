@@ -15,6 +15,9 @@ class usuario
   	public function BorrarUsuario()
 	 {
 	 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+			$anteconsulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM consulta WHERE usuarioid = $this->usuarioid");
+			$anteconsulta->execute();
+
 			$consulta =$objetoAccesoDato->RetornarConsulta("CALL BorrarUsuario(:idd)");
 				$consulta->bindValue(':idd',$this->usuarioid, PDO::PARAM_INT);
 				$consulta->execute();
