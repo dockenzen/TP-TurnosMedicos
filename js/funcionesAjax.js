@@ -226,10 +226,12 @@ function RestablecerPass($token, $idusuario)
 		$("#informe").html(retorno.responseText);
 	});
 }*/
-function TraerClima()
+function TraerNoticias()
 {
+	TraerClima();
+
 	var funcionAjax =$.ajax({
-		url:'TraerClima.php'
+		url:'TraerNoticias.php'
 	});
 	funcionAjax.done(function(retorno)
 	{
@@ -241,6 +243,25 @@ function TraerClima()
             $("img").remove();
             $("br").remove();
         })
+	});
+	funcionAjax.fail(function(retorno)
+	{
+		//alert(retorno);
+	});
+	funcionAjax.always(function(retorno)
+	{
+		//alert(retorno);
+	});
+}
+function TraerClima()
+{
+	var funcionAjax =$.ajax({
+		url:'TraerClima.php'
+	});
+	funcionAjax.done(function(retorno)
+	{
+		//alert(retorno);
+		$("#clima").html(retorno);
 	});
 	funcionAjax.fail(function(retorno)
 	{

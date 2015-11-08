@@ -36,7 +36,7 @@
 
 </head>
 
-<body onload="TraerClima()">
+<body onload="TraerNoticias()">
 
 <?php
 session_start();
@@ -51,13 +51,10 @@ session_start();
 			<h1 id="site-logo"><a href="#">Pami para programadores</a></h1>
 			<h2 id="site-description">Un lugar igual a otros, solo que mas lindo.</h2>
 		</hgroup>
-		<section >
-			<h8 class="widClima">				
-				<ul>
-					<li>Temperatura <h6 id="temp"></h5></li>
-					<li>Ciudad <h8 id="temp"></li>
-				</ul>	
-			</h8>
+		<section class="widget widClima">
+			<div id="clima">
+				
+			</div>			
 		</section>
 
 		<nav>
@@ -131,7 +128,7 @@ session_start();
 	</div>
 
 	<footer id="footer">
-
+			<label> Powered by El Dockenzen </label>
 	</footer>
 	<!-- /#footer --> 
 	
